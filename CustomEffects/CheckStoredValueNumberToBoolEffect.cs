@@ -14,7 +14,7 @@
                 {
                     int valueStored = target.Unit.GetStoredValue(_valueName);
 
-                    if (entryVariable == valueStored) 
+                    if (entryVariable == valueStored)
                     {
                         flag = true;
                     }

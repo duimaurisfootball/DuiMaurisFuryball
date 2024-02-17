@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dui_Mauris_Furyball.CustomEffects
+﻿namespace Dui_Mauris_Furyball.CustomEffects
 {
     public class ButterflyHeal : EffectSO
     {

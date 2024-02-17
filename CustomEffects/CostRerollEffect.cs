@@ -7,7 +7,7 @@
             List<ManaColorSO> list = new List<ManaColorSO>();
             for (int i = 0; i < length; i++)
             {
-                    list.Add(CostRerollEffect.RandomPig());
+                list.Add(CostRerollEffect.RandomPig());
             }
             return list.ToArray();
         }

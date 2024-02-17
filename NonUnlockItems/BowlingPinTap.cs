@@ -1,10 +1,4 @@
-﻿using Dui_Mauris_Furyball.CustomEffects;
-using Dui_Mauris_Furyball.ExtraStoredValues;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dui_Mauris_Furyball.NonUnlockItems
+﻿namespace Dui_Mauris_Furyball.NonUnlockItems
 {
     public class BowlingPinTap
     {

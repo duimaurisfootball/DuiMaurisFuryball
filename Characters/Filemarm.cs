@@ -22,10 +22,10 @@
                 {
                     TriggerCalls.OnCombatStart
                 };
-
+            
             //Alvinar Basics
             Character filemarm = new Character();
-            Debug.Log("loading");
+            
             filemarm.name = "Filemarm";
             filemarm.healthColor = Pigments.Purple;
             filemarm.entityID = (EntityIDs)981253;
@@ -120,10 +120,6 @@
 
 
             //sump
-            GenerateGray GrayMaker = ScriptableObject.CreateInstance<GenerateGray>();
-            GrayMaker._howmuch = 1;
-            GenerateGray GrayMakerer = ScriptableObject.CreateInstance<GenerateGray>();
-            GrayMakerer._howmuch = 2;
 
 
             Ability sump0 = new Ability();
@@ -134,7 +130,7 @@
             sump0.effects = new Effect[]
                 {
                     new(ScriptableObject.CreateInstance<HealEffect>(), 3, IntentType.Heal_1_4, Slots.Self),
-                    new(GrayMaker, 1, IntentType.Mana_Generate, Slots.Self),
+                    new(ScriptableObject.CreateInstance<RerollGray>(), 1, IntentType.Mana_Modify, Slots.Self),
                 };
             sump0.animationTarget = Slots.Self;
             sump0.visuals = LoadedAssetsHandler.GetEnemyAbility("RevoltingRevolution_A").visuals;
@@ -154,10 +150,9 @@
             sump3.name = "I'd Rather Die than Describe This Sump";
             sump3.description = "Heal this party member 6 health. Change 2 pigment to gray.";
             sump3.effects[0]._entryVariable = 6;
-            sump3.effects[1] = new Effect(GrayMakerer,
-                1, IntentType.Mana_Generate, Slots.Self);
+            sump3.effects[1]._entryVariable = 2;
 
-            Debug.Log("loading");
+            
             filemarm.AddLevel(11, new Ability[3] { bilge0, film0, sump0 }, 0);
             filemarm.AddLevel(12, new Ability[3] { bilge1, film1, sump1 }, 1);
             filemarm.AddLevel(13, new Ability[3] { bilge2, film2, sump2 }, 2);
@@ -215,7 +210,7 @@
             var luckyGray = ScriptableObject.CreateInstance<LuckyBlueColorSetEffect>();
             luckyGray._luckyColor = Pigments.Gray;
 
-            PerformEffectPassiveAbility grayEssence = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+            var grayEssence = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
             grayEssence._passiveName = "Gray Essence";
             grayEssence.type = (PassiveAbilityTypes)891237;
             grayEssence.passiveIcon = ResourceLoader.LoadSprite("GrayEssence");
@@ -230,8 +225,8 @@
                     TriggerCalls.OnFirstTurnStart,
                 };
 
-            var giveGray = ScriptableObject.CreateInstance<AddPassiveEffect>();
-            giveGray._passiveToAdd = grayEssence;
+            var giveGray = ScriptableObject.CreateInstance<ExtraPassiveAbility_Wearable_SMS>();
+            giveGray._extraPassiveAbility = grayEssence;
 
             EffectItem ipecac = new EffectItem();
             ipecac.name = "Syrup of Ipecac";
@@ -244,9 +239,9 @@
             ipecac.itemPools = BrutalAPI.ItemPools.Shop;
             ipecac.shopPrice = 9;
             ipecac.immediate = true;
-            ipecac.effects = new Effect[]
+            ipecac.equippedModifiers = new WearableStaticModifierSetterSO[]
             {
-                new(giveGray, 1, null, Slots.Self),
+                giveGray
             };
 
 

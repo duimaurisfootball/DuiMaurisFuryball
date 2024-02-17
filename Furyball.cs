@@ -1,18 +1,20 @@
-﻿global using System;
-global using BepInEx;
+﻿global using BepInEx;
 global using BrutalAPI;
-global using UnityEngine;
-global using System.IO;
-global using System.Reflection;
-global using System.Linq;
-global using MonoMod.RuntimeDetour;
-global using System.Collections.Generic;
-global using HarmonyLib;
-global using static Dui_Mauris_Furyball.FoolBossUnlockSystem;
 global using Dui_Mauris_Furyball.CustomEffects;
 global using Dui_Mauris_Furyball.ExtraStoredValues;
-using Dui_Mauris_Furyball.NonUnlockItems;
+global using HarmonyLib;
+global using MonoMod.RuntimeDetour;
+global using System;
+global using System.Collections.Generic;
+global using System.IO;
+global using System.Linq;
+global using System.Reflection;
+global using System.Reflection.Emit;
+global using UnityEngine;
+global using System.Collections;
+global using static Dui_Mauris_Furyball.FoolBossUnlockSystem;
 using Dui_Mauris_Furyball.Characters;
+using Dui_Mauris_Furyball.NonUnlockItems;
 
 namespace Dui_Mauris_Furyball
 {
@@ -73,7 +75,7 @@ namespace Dui_Mauris_Furyball
             }
         }
     }
-    [BepInPlugin("Dui_Mauris_Football.Furyball", "Dui Mauris Furyball", "2.0.1")]
+    [BepInPlugin("Dui_Mauris_Football.Furyball", "Dui Mauris Furyball", "2.1.1")]
     public class Furyball : BaseUnityPlugin
     {
         public void Awake()
@@ -85,17 +87,20 @@ namespace Dui_Mauris_Furyball
             FoolBossUnlockSystem.Setup();
 
             //add characters
-            Spoogle.Add();
-            Alvinar.Add();
-            Salad.Add();
             Vandander.Add();
             VandanderHoles.Add();
+            Spoogle.Add();
             Filemarm.Add();
+            Salad.Add();
             PreFabSalad.Add();
             Rodney.Add();
             Vat.Add();
             Malebolge.Add();
             Felix.Add();
+            Alvinar.Add();
+            Naba.Add();
+            Aelie.Add();
+            Gomma.Add();
 
 
             //add items
@@ -105,12 +110,17 @@ namespace Dui_Mauris_Furyball
             BowlingPinGreek.Add();
             BowlingPinHead.Add();
             BowlingPinBaby.Add();
+            NumberMagnet.Add();
+            AlumSalt.Add();
+            AppleCiderVinegar.Add();
+            Sauerkraut.Add();
+            PickledBeets.Add();
         }
     }
 }
-        
-   
-    
+
+
+
 
 
 

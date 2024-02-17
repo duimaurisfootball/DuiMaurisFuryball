@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public class FireDamageEffectFootball : EffectSO
     {

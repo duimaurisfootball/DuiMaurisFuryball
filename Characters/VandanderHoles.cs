@@ -6,7 +6,6 @@
         {
             //holes basics
             Character vandanderHoles = new Character();
-            Debug.Log("loading");
             vandanderHoles.name = "Holes of Vandander";
             vandanderHoles.healthColor = Pigments.Purple;
             vandanderHoles.entityID = (EntityIDs)22123125;
@@ -51,7 +50,7 @@
             vandalize.animationTarget = Slots.Self;
             vandalize.visuals = LoadedAssetsHandler.GetEnemy("Sepulchre_EN").abilities[0].ability.visuals;
 
-            Debug.Log("loading");
+            
             vandanderHoles.AddLevel(8, new Ability[] { vandalize }, 0);
             vandanderHoles.AddCharacter();
 

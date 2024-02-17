@@ -54,7 +54,7 @@
             EffectItem spear = new EffectItem();
             spear.name = "Spear";
             spear.flavorText = "\"A hostile take on slick tricks.\"";
-            spear.description = "Adds ''Spear'' as an additional ability, a highly versatile but limited attack.";
+            spear.description = "Adds ''Spear'' as an additional ability, a highly versatile attack with four uses per combat.";
             spear.sprite = ResourceLoader.LoadSprite("Spear", 1, null);
             spear.trigger = TriggerCalls.OnCombatStart;
             spear.unlockableID = (UnlockableID)999084;
@@ -67,12 +67,7 @@
                 new(spearSet, 4, null, Slots.Self),
                 new(liveSpears, 1, null, Slots.Self),
             };
-            Connection_PerformEffectPassiveAbility connection_PerformEffectPassiveAbility = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0] as Connection_PerformEffectPassiveAbility;
-            CasterAddRandomExtraAbilityEffect casterAddRandomExtraAbilityEffect = connection_PerformEffectPassiveAbility.connectionEffects[1].effect as CasterAddRandomExtraAbilityEffect;
-            casterAddRandomExtraAbilityEffect._extraData = new List<ExtraAbility_Wearable_SMS>(casterAddRandomExtraAbilityEffect._extraData)
-            {
-                theyAreSpears
-            }.ToArray();
+            theyAreSpears._extraAbility.ability.specialStoredValue = (UnitStoredValueNames)567235;
             spear.AddItem();
         }
     }

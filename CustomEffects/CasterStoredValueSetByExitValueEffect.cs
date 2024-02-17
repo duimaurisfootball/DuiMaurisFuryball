@@ -18,7 +18,7 @@
             {
                 amountOut = base.PreviousExitValue;
             }
-            
+
 
             exitAmount = amountOut;
             caster.SetStoredValue(_valueName, exitAmount);

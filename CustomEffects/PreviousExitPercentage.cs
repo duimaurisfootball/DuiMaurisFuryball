@@ -4,7 +4,7 @@
     {
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
-            exitAmount = base.PreviousExitValue * entryVariable / 100 ;
+            exitAmount = base.PreviousExitValue * entryVariable / 100;
             return true;
         }
     }

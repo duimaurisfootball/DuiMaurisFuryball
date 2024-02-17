@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-namespace Dui_Mauris_Furyball.CustomEffects
+﻿namespace Dui_Mauris_Furyball.CustomEffects
 {
     public class BowlingReroll : EffectSO
     {
@@ -25,7 +20,7 @@ namespace Dui_Mauris_Furyball.CustomEffects
             exitAmount = 0;
             if (caster is CharacterCombat cc)
             {
-                
+
                 foreach (var ab in cc.CombatAbilities)
                 {
 

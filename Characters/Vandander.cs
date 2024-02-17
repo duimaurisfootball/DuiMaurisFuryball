@@ -1,6 +1,4 @@
-﻿using Dui_Mauris_Furyball.CustomEffects;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public static class Vandander
     {
@@ -31,7 +29,7 @@ namespace Dui_Mauris_Furyball
 
             //Vandander Basics
             Character vandander = new Character();
-            Debug.Log("loading");
+            
             vandander.name = "Vandander";
             vandander.healthColor = Pigments.Purple;
             vandander.entityID = (EntityIDs)22123124;
@@ -209,7 +207,7 @@ namespace Dui_Mauris_Furyball
             };
 
 
-            EffectItem symbolOfPeace = new EffectItem();
+            var symbolOfPeace = new EffectItem();
             symbolOfPeace.name = "Symbol of Peace";
             symbolOfPeace.flavorText = "\"Actually, it's a brutal, painful and archaic device for killing criminals.\"";
             symbolOfPeace.description = "Attempt to summon as much of Vandander as can be managed.";
@@ -231,7 +229,7 @@ namespace Dui_Mauris_Furyball
             fishMoney._isMultiplier = true;
 
             var fishColorsGenerator = ScriptableObject.CreateInstance<ChangePigmentGeneratorPool_Effect>();
-            fishColorsGenerator._newPool = new ManaColorSO[] 
+            fishColorsGenerator._newPool = new ManaColorSO[]
             {
                 Pigments.Yellow,
                 Pigments.Red,
@@ -248,14 +246,15 @@ namespace Dui_Mauris_Furyball
                 Pigments.Purple,
             };
 
-            DoubleEffectItem thousandFish = new DoubleEffectItem();
+            var thousandFish = new DoubleEffectItem();
             thousandFish.name = "One Thousand Fish";
             thousandFish.flavorText = "\"A miracle of numbers.\"";
-            thousandFish.description = "The yellow pigment generator now generates pigment of random colors instead. Generate 2 pigment of a random color on turn start. 50% chance to gain twice as many coins at the end of combat.";
+            thousandFish.description = "The yellow pigment generator now generates pigment of random colors instead. Generate 2 pigment of a random color on turn start. Gain twice as many coins at the end of combat.";
             thousandFish.sprite = ResourceLoader.LoadSprite("OneThousandFish", 1, null);
             thousandFish.unlockableID = (UnlockableID)2226356;
             thousandFish.namePopup = true;
             thousandFish.itemPools = BrutalAPI.ItemPools.Treasure;
+            thousandFish.fishRarity = 2;
             thousandFish.trigger = TriggerCalls.OnTurnStart;
             thousandFish.firstEffects = new Effect[]
             {
@@ -268,14 +267,14 @@ namespace Dui_Mauris_Furyball
             thousandFish.secondEffects = new Effect[]
             {
                 new(fishColorsGenerator, 1, null, Slots.Self),
-                new(fishMoney, 2, null, Slots.Self, Conditions.Chance(50)),
+                new(fishMoney, 2, null, Slots.Self),
             };
 
 
-            FoolItemPairs VandanderPair = new FoolItemPairs(vandander, symbolOfPeace, thousandFish);
+            FoolItemPairs VandanderPair = new FoolItemPairs(vandander, thousandFish, symbolOfPeace);
             VandanderPair.Add();
 
-            Debug.Log("loading");
+            
             vandander.AddLevel(15, new Ability[3] { vow0, vandanderize0, vandalaEffect0 }, 0);
             vandander.AddLevel(19, new Ability[3] { vow1, vandanderize1, vandalaEffect1 }, 1);
             vandander.AddLevel(24, new Ability[3] { vow2, vandanderize2, vandalaEffect2 }, 2);

@@ -14,15 +14,15 @@
             exitAmount = 0;
             foreach (TargetSlotInfo targetSlotInfo in targets)
             {
-                    exitAmount = targetSlotInfo.Unit.GetStoredValue(this._valueName);
-                    bool randomBetweenPrevious = this._randomBetweenPrevious;
-                    if (randomBetweenPrevious)
-                    {
-                        entryVariable = UnityEngine.Random.Range(base.PreviousExitValue, entryVariable + 1);
-                    }
-                    exitAmount += (this._increase ? entryVariable : (-entryVariable));
-                    exitAmount = Mathf.Max(this._minimumValue, exitAmount);
-                    targetSlotInfo.Unit.SetStoredValue(this._valueName, exitAmount);
+                exitAmount = targetSlotInfo.Unit.GetStoredValue(this._valueName);
+                bool randomBetweenPrevious = this._randomBetweenPrevious;
+                if (randomBetweenPrevious)
+                {
+                    entryVariable = UnityEngine.Random.Range(base.PreviousExitValue, entryVariable + 1);
+                }
+                exitAmount += (this._increase ? entryVariable : (-entryVariable));
+                exitAmount = Mathf.Max(this._minimumValue, exitAmount);
+                targetSlotInfo.Unit.SetStoredValue(this._valueName, exitAmount);
             }
             return exitAmount > 0;
         }

@@ -1,6 +1,4 @@
-﻿using Dui_Mauris_Furyball.CustomEffects;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public static class Vat
     {
@@ -49,7 +47,7 @@ namespace Dui_Mauris_Furyball
             };
             SetCasterExtraSpritesEffect setVatSprites = ScriptableObject.CreateInstance<SetCasterExtraSpritesEffect>();
             setVatSprites._spriteType = (ExtraSpriteType)827321;
-            
+
 
             //custom passives
             //leaky (2)
@@ -110,7 +108,11 @@ namespace Dui_Mauris_Furyball
             var Brevious = ScriptableObject.CreateInstance<PreviousEffectCondition>();
             Brevious.wasSuccessful = false;
 
-            
+
+            var Crevious = ScriptableObject.CreateInstance<PreviousEffectCondition>();
+            Crevious.wasSuccessful = true;
+            Crevious.previousAmount = 2;
+
 
             //custom base ability
             Ability apoptosis = new Ability();
@@ -120,9 +122,10 @@ namespace Dui_Mauris_Furyball
             apoptosis.sprite = ResourceLoader.LoadSprite("vesicle");
             apoptosis.effects = new Effect[]
             {
-              new(ScriptableObject.CreateInstance<DamageEffect>(), 7, IntentType.Damage_7_10, Slots.Self, Conditions.Chance(50)),
-              new(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Self, Brevious),
-              new(ScriptableObject.CreateInstance<HealEffect>(), 5, IntentType.Heal_1_4, Slots.SlotTarget(new int[] { -5, -4, -3, -2, -1, 1, 2, 3, 4, 5}, true))
+                new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, Conditions.Chance(50)),
+                new(ScriptableObject.CreateInstance<DamageEffect>(), 2, IntentType.Damage_1_2, Slots.Self, Brevious),
+                new(ScriptableObject.CreateInstance<DamageEffect>(), 7, IntentType.Damage_7_10, Slots.Self, Crevious),
+                new(ScriptableObject.CreateInstance<HealEffect>(), 5, IntentType.Heal_1_4, Slots.SlotTarget(new int[] { -5, -4, -3, -2, -1, 1, 2, 3, 4, 5}, true))
             };
             apoptosis.animationTarget = Slots.Self;
             apoptosis.visuals = LoadedAssetsHandler.GetEnemyAbility("HeartBreaker_A").visuals;
@@ -130,7 +133,6 @@ namespace Dui_Mauris_Furyball
 
             //Vat Basics
             Character vat = new Character();
-            Debug.Log("loading");
             vat.name = "Vat";
             vat.healthColor = Pigments.Red;
             vat.entityID = (EntityIDs)257996;
@@ -309,7 +311,7 @@ namespace Dui_Mauris_Furyball
             doubleHealth.isChangePercentage = true;
             doubleHealth.maxHealthChange = 100;
 
-            
+
 
             EffectItem sickleCells = new EffectItem();
             sickleCells.name = "Sickle Cells";
@@ -323,8 +325,8 @@ namespace Dui_Mauris_Furyball
             sickleCells.immediate = true;
             sickleCells.equippedModifiers = new WearableStaticModifierSetterSO[]
             {
-                giveLeaky, 
-                healthToRed, 
+                giveLeaky,
+                healthToRed,
                 doubleHealth,
             };
             sickleCells.effects = new Effect[]
@@ -335,7 +337,7 @@ namespace Dui_Mauris_Furyball
             //
             //
             //
-           
+
             var healthToBlue = ScriptableObject.CreateInstance<HealthColorChange_Wearable_SMS>();
             healthToBlue._healthColor = Pigments.Blue;
 
@@ -366,13 +368,12 @@ namespace Dui_Mauris_Furyball
                 healthToBlue,
                 halfHealth,
             };
-            
 
-            FoolItemPairs VatPair = new FoolItemPairs(vat, sickleCells, festerFlesh);
+
+            FoolItemPairs VatPair = new FoolItemPairs(vat, festerFlesh, sickleCells);
             VatPair.Add();
 
 
-            Debug.Log("loading");
             vat.AddLevel(50, new Ability[3] { nucleolusMove, golgiBody, DNA }, 0);
             vat.AddCharacter();
 

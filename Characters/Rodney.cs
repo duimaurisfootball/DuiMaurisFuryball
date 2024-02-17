@@ -42,7 +42,7 @@
 
             //Salad Basics
             Character rodney = new Character();
-            Debug.Log("loading");
+            
             rodney.name = "Rodney";
             rodney.healthColor = Pigments.Purple;
             rodney.entityID = (EntityIDs)257141;
@@ -185,7 +185,7 @@
                 };
             veneration0.animationTarget = Slots.SlotTarget(new int[] { 1 }, true);
             veneration0.visuals = LoadedAssetsHandler.GetCharacterAbility("Blow_1_A").visuals;
-                
+
             Ability veneration1 = veneration0.Duplicate();
             veneration1.name = "Guiding Veneration";
             veneration1.description = "Heal the right ally 3. If the right ally is cursed, refresh them.";
@@ -206,6 +206,30 @@
             //
             //
 
+            var kaglasFinger = new EffectItem();
+            kaglasFinger.name = "Cursed Finger";
+            kaglasFinger.flavorText = "\"It curls.\"";
+            kaglasFinger.description = "This party member is cursed.";
+            kaglasFinger.sprite = ResourceLoader.LoadSprite("KaglasFinger", 1, null);
+            kaglasFinger.unlockableID = (UnlockableID)589990;
+            kaglasFinger.namePopup = true;
+            kaglasFinger.itemPools = BrutalAPI.ItemPools.Extra;
+            kaglasFinger.shopPrice = 1;
+            kaglasFinger.trigger = TriggerCalls.OnCombatStart;
+            kaglasFinger.effects = new Effect[]
+            {
+                new(ScriptableObject.CreateInstance<ApplyCursedEffect>(), 1, null, Slots.Self),
+            };
+            kaglasFinger.AddItem();
+
+            var monkeysPaw = ScriptableObject.CreateInstance<ExtraLootOptionsEffect>();
+            monkeysPaw._itemName = "CursedFinger_EW";
+            monkeysPaw._changeOption = true;
+
+            //
+            //
+            //
+
             var previops0 = ScriptableObject.CreateInstance<MultiPreviousEffectCondition>();
             previops0.wasSuccessful = new bool[] { true, true, true };
             previops0.previousAmount = new int[] { 1, 2, 3 };
@@ -220,7 +244,7 @@
             var ribcage = new DoubleEffectItem();
             ribcage.name = "Kagla's Ribcage";
             ribcage.flavorText = "\"HOOOGHA! HOOUUGHA! AAAAAAA-HAHAHAHA!!\"";
-            ribcage.description = "This party member is cursed. Upon this party member using an ability while cursed, there is a 40% chance to refresh all cursed party members.";
+            ribcage.description = "This party member is cursed. Upon this party member using an ability while cursed, there is a 50% chance to refresh all cursed party members.";
             ribcage.sprite = ResourceLoader.LoadSprite("KaglasRibcage", 1, null);
             ribcage.unlockableID = (UnlockableID)589991;
             ribcage.itemPools = BrutalAPI.ItemPools.Treasure;
@@ -229,6 +253,8 @@
             ribcage.firstEffects = new Effect[]
             {
                 new(ScriptableObject.CreateInstance<ApplyCursedEffect>(), 1, null, Slots.Self),
+                new(monkeysPaw, 1, null, Slots.Self, Conditions.Chance(50)),
+                new(monkeysPaw, 1, null, Slots.Self, Conditions.Chance(50)),
             };
             ribcage.secondPopUp = false;
             ribcage.SecondTrigger = new TriggerCalls[]
@@ -238,7 +264,7 @@
             ribcage.secondEffects = new Effect[]
             {
                 //self
-                new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, Conditions.Chance(40)),
+                new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, Conditions.Chance(50)),
                 new(ScriptableObject.CreateInstance<PopUpCasterItemInfoEffect>(), 1, null, Slots.Self, ScriptableObject.CreateInstance<PreviousEffectCondition>()),
                 new(checkCursed, 1, null, Slots.Self),
                 new(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(), 1, null, Slots.Self, previops1),
@@ -299,7 +325,7 @@
             var leftLeg = new DoubleEffectItem();
             leftLeg.name = "Kagla's Left Leg";
             leftLeg.flavorText = "\"RUN, COWARD!\"";
-            leftLeg.description = "This party member is cursed. Upon this party member being moved while cursed, there is a 40% refresh the movement of all cursed party members.";
+            leftLeg.description = "This party member is cursed. Upon this party member being moved while cursed, there is a 75% chance to refresh the movement of all cursed party members.";
             leftLeg.sprite = ResourceLoader.LoadSprite("KaglasLeftLeg", 1, null);
             leftLeg.unlockableID = (UnlockableID)589992;
             leftLeg.itemPools = BrutalAPI.ItemPools.Treasure;
@@ -308,6 +334,8 @@
             leftLeg.firstEffects = new Effect[]
             {
                 new(ScriptableObject.CreateInstance<ApplyCursedEffect>(), 1, null, Slots.Self),
+                new(monkeysPaw, 1, null, Slots.Self, Conditions.Chance(50)),
+                new(monkeysPaw, 1, null, Slots.Self, Conditions.Chance(50)),
             };
             leftLeg.secondPopUp = false;
             leftLeg.SecondTrigger = new TriggerCalls[]
@@ -317,7 +345,7 @@
             leftLeg.secondEffects = new Effect[]
             {
                 //self
-                new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, Conditions.Chance(40)),
+                new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self, Conditions.Chance(75)),
                 new(ScriptableObject.CreateInstance<PopUpCasterItemInfoEffect>(), 1, null, Slots.Self, ScriptableObject.CreateInstance<PreviousEffectCondition>()),
                 new(checkCursed, 1, null, Slots.Self),
                 new(ScriptableObject.CreateInstance<RestoreSwapUseEffect>(), 1, null, Slots.Self, previops1),
@@ -371,11 +399,11 @@
                 new(ScriptableObject.CreateInstance<RestoreSwapUseEffect>(), 1, null, Slots.SlotTarget(new int[] { 4 }, true), previops0),
             };
 
-            FoolItemPairs RodneyPair = new FoolItemPairs(rodney, ribcage, leftLeg);
+            FoolItemPairs RodneyPair = new FoolItemPairs(rodney, leftLeg, ribcage);
             RodneyPair.Add();
 
 
-            Debug.Log("loading");
+            
             rodney.AddLevel(30, new Ability[3] { tribulation0, rotation0, veneration0 }, 0);
             rodney.AddLevel(35, new Ability[3] { tribulation1, rotation1, veneration1 }, 1);
             rodney.AddLevel(40, new Ability[3] { tribulation2, rotation2, veneration2 }, 2);

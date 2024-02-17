@@ -1,8 +1,4 @@
-﻿
-
-using Dui_Mauris_Furyball.CustomEffects;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public static class Malebolge
     {
@@ -11,7 +7,7 @@ namespace Dui_Mauris_Furyball
         {
             //Malebolge Basics
             Character malebolge = new Character();
-            Debug.Log("loading");
+            
             malebolge.name = "Malebolge";
             malebolge.healthColor = Pigments.Gray;
             malebolge.entityID = (EntityIDs)257772;
@@ -55,7 +51,6 @@ namespace Dui_Mauris_Furyball
                 };
 
 
-
             //explode damage effects
             var indirectDamage = ScriptableObject.CreateInstance<DamageEffect>();
             indirectDamage._indirect = true;
@@ -77,7 +72,6 @@ namespace Dui_Mauris_Furyball
                 {
                     new(ScriptableObject.CreateInstance<FireDamageEffectFootball>(), 8, IntentType.Field_Fire, Slots.Front),
                 };
-            
 
 
             //indirect damage for accelerate
@@ -111,11 +105,7 @@ namespace Dui_Mauris_Furyball
                 };
             accelerateTime.animationTarget = allEnemy;
             accelerateTime.visuals = LoadedAssetsHandler.GetCharacterAbility("Clobber_1_A").visuals;
-            
 
-            Debug.Log("loading");
-            malebolge.AddLevel(100, new Ability[3] { glorify, combust, accelerateTime }, 0);
-            malebolge.AddCharacter();
 
             //
             //
@@ -189,6 +179,11 @@ namespace Dui_Mauris_Furyball
 
             FoolItemPairs MalebolgePair = new FoolItemPairs(malebolge, carversTools, malebolgeHead);
             MalebolgePair.Add();
+
+            
+            malebolge.AddLevel(100, new Ability[3] { glorify, combust, accelerateTime }, 0);
+            malebolge.levels[0].rankAbilities[2].ability.specialStoredValue = (UnitStoredValueNames)800808;
+            malebolge.AddCharacter();
 
             Debug.Log("It's working! It's working! | Dui Mauris Furyball | Malebolge");
         }

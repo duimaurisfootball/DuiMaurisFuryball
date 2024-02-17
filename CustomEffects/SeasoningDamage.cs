@@ -22,7 +22,7 @@
         {
             if (args is WillApplyDamageContext context)
             {
-                (context.exception).AddModifier(new PercentageValueModifierButNotStupid(true, (context.target as IStatusEffector).StatusEffects.Count * 20, true));
+                (context.exception).AddModifier(new PercentageValueModifierButNotStupid(true, (context.target as IStatusEffector).StatusEffects.Count * 30, true));
             }
         }
 
@@ -32,26 +32,26 @@
         }
     }
 
-public class PercentageValueModifierButNotStupid : IntValueModifier
-{
-    public readonly float percentage;
-    public readonly bool doesIncrease;
-
-    public PercentageValueModifierButNotStupid(bool dmgDealt, int percent, bool increase) : base(dmgDealt ? 4 : 62)
+    public class PercentageValueModifierButNotStupid : IntValueModifier
     {
-        percentage = Mathf.Max(percent, 0);
-        doesIncrease = increase;
-    }
+        public readonly float percentage;
+        public readonly bool doesIncrease;
 
-    public override int Modify(int value)
-    {
-        float f = percentage * (float)value / 100f;
-        int num = Mathf.Max(0, Mathf.CeilToInt(f));
-        if (!doesIncrease)
+        public PercentageValueModifierButNotStupid(bool dmgDealt, int percent, bool increase) : base(dmgDealt ? 4 : 62)
         {
-            return Mathf.Max(0, value - num);
+            percentage = Mathf.Max(percent, 0);
+            doesIncrease = increase;
         }
-        return value + num;
+
+        public override int Modify(int value)
+        {
+            float f = percentage * (float)value / 100f;
+            int num = Mathf.Max(0, Mathf.CeilToInt(f));
+            if (!doesIncrease)
+            {
+                return Mathf.Max(0, value - num);
+            }
+            return value + num;
+        }
     }
-}
 }

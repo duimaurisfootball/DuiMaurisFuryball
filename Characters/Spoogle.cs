@@ -11,13 +11,13 @@
             LeakinessUp._valueName = (UnitStoredValueNames)888833;
             CasterStoredValueChangeEffect LeakinessDown = ScriptableObject.CreateInstance<CasterStoredValueChangeEffect>();
             LeakinessDown._increase = false;
-            LeakinessDown._minimumValue = 1;
+            LeakinessDown._minimumValue = 0;
             LeakinessDown._valueName = (UnitStoredValueNames)888833;
 
 
             //custom passives
             PerformEffectPassiveAbility Leaky1 = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
-            Leaky1._passiveName = "Leaky";
+            Leaky1._passiveName = "Leaky (1)";
             Leaky1.type = (PassiveAbilityTypes)833333;
             Leaky1.passiveIcon = Passives.Leaky.passiveIcon;
             Leaky1._enemyDescription = "Upon receiving direct damage, this enemy generates extra pigment of its health colour.";
@@ -34,7 +34,7 @@
 
             PerformEffectPassiveAbility Solidifying = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
             Solidifying._passiveName = "Solidifying";
-            Leaky1.type = (PassiveAbilityTypes)883333;
+            Solidifying.type = (PassiveAbilityTypes)883333;
             Solidifying.passiveIcon = ResourceLoader.LoadSprite("SolidifyingPassiveIcon");
             Solidifying._enemyDescription = "At the start of this enemy's turn, reduce this enemy's leaky by 1.";
             Solidifying._characterDescription = "At the start of this character's turn, reduce this character's leaky by 1.";
@@ -49,7 +49,7 @@
 
             //Spoogle Basics
             Character spoogle = new Character();
-            Debug.Log("loading");
+            
             spoogle.name = "Spoogle";
             spoogle.healthColor = Pigments.Yellow;
             spoogle.entityID = (EntityIDs)838383;
@@ -70,7 +70,6 @@
                 Leaky1
             };
 
-
             IDetour Leakiness = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
                 typeof(Spoogle).GetMethod("AddStoredValueName", ~BindingFlags.Default));
 
@@ -89,14 +88,14 @@
             //vomit
             Ability vomit0 = new Ability();
             vomit0.name = "Vomit up Dinner";
-            vomit0.description = "Increase Leaky by 1. Deal 1 self damage. Deal 3 indirect damage to the opposing enemy. 80% chance to refresh this party member.";
-            vomit0.cost = new ManaColorSO[] { Pigments.SplitPigment( Pigments.Yellow, Pigments.Blue ) };
+            vomit0.description = "Increase Leaky by 1. Deal 1 self damage. Deal 1 indirect damage to the opposing enemy. 80% chance to refresh this party member.";
+            vomit0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Yellow, Pigments.Blue) };
             vomit0.sprite = ResourceLoader.LoadSprite("vomit");
             vomit0.effects = new Effect[]
                 {
                     new (LeakinessUp, 1, null, Slots.Self),
                     new (ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Self),
-                    new (IndirectDamage, 3, IntentType.Damage_1_2, Slots.Front),
+                    new (IndirectDamage, 1, IntentType.Damage_1_2, Slots.Front),
                     new (ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(), 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(80)),
                 };
             vomit0.animationTarget = Slots.Self;
@@ -104,22 +103,23 @@
 
             Ability vomit1 = vomit0.Duplicate();
             vomit1.name = "Vomit up Lunch";
-            vomit1.description = "Increase Leaky by 1. Deal 1 self damage. Deal 4 indirect damage to the opposing enemy. 83% chance to refresh this party member.";
-            vomit1.effects[2]._entryVariable = 4;
+            vomit1.description = "Increase Leaky by 1. Deal 1 self damage. Deal 2 indirect damage to the opposing enemy. 83% chance to refresh this party member.";
+            vomit1.effects[2]._entryVariable = 2;
             vomit1.effects[3] = new Effect(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(),
                 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(83));
 
             Ability vomit2 = vomit1.Duplicate();
             vomit2.name = "Vomit up Breakfast";
-            vomit2.description = "Increase Leaky by 1. Deal 1 self damage. Deal 5 indirect damage to the opposing enemy. 88% chance to refresh this party member.";
-            vomit2.effects[2]._entryVariable = 5;
+            vomit2.description = "Increase Leaky by 1. Deal 1 self damage. Deal 3 indirect damage to the opposing enemy. 88% chance to refresh this party member.";
+            vomit2.effects[2]._entryVariable = 3;
+            vomit0.effects[2]._intent = IntentType.Damage_3_6;
             vomit2.effects[3] = new Effect(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(),
                 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(88));
 
             Ability vomit3 = vomit2.Duplicate();
             vomit3.name = "Vomit up Yesterday's Dinner";
-            vomit3.description = "Increase Leaky by 1. Deal 1 self damage. Deal 6 indirect damage to the opposing enemy. 90% chance to refresh this party member.";
-            vomit3.effects[2]._entryVariable = 6;
+            vomit3.description = "Increase Leaky by 1. Deal 1 self damage. Deal 4 indirect damage to the opposing enemy. 90% chance to refresh this party member.";
+            vomit3.effects[2]._entryVariable = 4;
             vomit3.effects[3] = new Effect(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(),
                 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(90));
 
@@ -130,37 +130,37 @@
 
             Ability ablate0 = new Ability();
             ablate0.name = "Feebly Ablate";
-            ablate0.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal damage equal to 150% of the pigment consumed to the Opposing enemy.";
-            ablate0.cost = new ManaColorSO[] { Pigments.SplitPigment( Pigments.Red, Pigments.Yellow ), Pigments.SplitPigment( Pigments.Red, Pigments.Yellow ) };
+            ablate0.description = "Increase Leaky by 3, then heal 1. Consume all yellow pigment. Deal 1 damage for each pigment consumed to the Opposing enemy.";
+            ablate0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Red, Pigments.Yellow), Pigments.SplitPigment(Pigments.Red, Pigments.Yellow) };
             ablate0.sprite = ResourceLoader.LoadSprite("ablate");
             ablate0.effects = new Effect[]
                 {
                     new(LeakinessUp, 3, null, Slots.Self),
-                    new(ScriptableObject.CreateInstance<HealEffect>(), 2, IntentType.Heal_1_4, Slots.Self),
+                    new(ScriptableObject.CreateInstance<HealEffect>(), 1, IntentType.Heal_1_4, Slots.Self),
                     new(YummyYellow, 0, IntentType.Mana_Consume, Slots.Self),
-                    new(ScriptableObject.CreateInstance<PreviousExitPercentage>(), 150, null, Slots.Self),
-                    new(AblateDamage, 1, IntentType.Damage_11_15, Slots.Front),
+                    new(ScriptableObject.CreateInstance<PreviousExitPercentage>(), 100, null, Slots.Self),
+                    new(AblateDamage, 1, IntentType.Damage_7_10, Slots.Front),
                 };
             ablate0.animationTarget = Slots.Self;
             ablate0.visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals;
 
             Ability ablate1 = ablate0.Duplicate();
             ablate1.name = "Fiercely Ablate";
-            ablate1.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal damage equal to 180% of the pigment consumed to the Opposing enemy.";
-            ablate1.effects[3]._entryVariable = 180;
-            ablate1.effects[4]._intent = IntentType.Damage_16_20;
+            ablate1.description = "Increase Leaky by 3, then heal 1. Consume all yellow pigment. Deal 1.3 damage for each pigment consumed to the Opposing enemy.";
+            ablate1.effects[3]._entryVariable = 130;
+            ablate1.effects[4]._intent = IntentType.Damage_11_15;
 
             Ability ablate2 = ablate1.Duplicate();
             ablate2.name = "Frightfully Ablate";
-            ablate2.description = "Increase Leaky by 3, then heal 3. Consume all yellow pigment. Deal damage equal to 200% of the pigment consumed to the Opposing enemy.";
-            ablate2.effects[1]._entryVariable = 3;
-            ablate2.effects[3]._entryVariable = 200;
+            ablate2.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal 1.6 damage for each pigment consumed to the Opposing enemy.";
+            ablate2.effects[3]._entryVariable = 160;
+            ablate2.effects[4]._intent = IntentType.Damage_16_20;
 
             Ability ablate3 = ablate2.Duplicate();
             ablate3.name = "Fantasmagorically Ablate";
-            ablate3.description = "Increase Leaky by 3, then heal 3. Consume all yellow pigment. Deal damage equal to 220% of the pigment consumed to the Opposing enemy.";
-            ablate3.effects[3]._entryVariable = 3;
-            ablate3.effects[3]._entryVariable = 220;
+            ablate3.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal 1.8 damage for each pigment consumed to the Opposing enemy.";
+            ablate3.effects[1]._entryVariable = 3;
+            ablate3.effects[3]._entryVariable = 180;
 
             //concatenation
             HealEffect ConcatenationHeal = ScriptableObject.CreateInstance<HealEffect>();
@@ -186,16 +186,19 @@
             concatenation1.name = "Oxidation Concatenation";
             concatenation1.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1.3 for every pigment consumed.";
             concatenation1.effects[3]._entryVariable = 130;
+            concatenation1.effects[4]._intent = IntentType.Heal_5_10;
 
             Ability concatenation2 = concatenation1.Duplicate();
             concatenation2.name = "Coagulation Concatenation";
             concatenation2.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1.6 for every pigment consumed.";
             concatenation2.effects[3]._entryVariable = 160;
+            concatenation2.effects[4]._intent = IntentType.Heal_11_20;
 
             Ability concatenation3 = concatenation2.Duplicate();
             concatenation3.name = "Imagination Concatentation";
             concatenation3.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 2 for every pigment consumed.";
             concatenation3.effects[3]._entryVariable = 200;
+            concatenation3.effects[4]._intent = IntentType.Heal_21;
 
             //
             //
@@ -259,16 +262,15 @@
             {
                 TriggerCalls.OnTurnStart,
             };
-            bismuthSubsalicylate.secondEffects = new Effect[] 
-            { 
+            bismuthSubsalicylate.secondEffects = new Effect[]
+            {
                 new(makeYellow, 1, null, Slots.Self),
-                new(ScriptableObject.CreateInstance<PopUpCasterItemInfoEffect>(), 1, null, Slots.Self),
             };
 
             FoolItemPairs SpooglePair = new FoolItemPairs(spoogle, iridescentCrystal, bismuthSubsalicylate);
             SpooglePair.Add();
 
-            Debug.Log("loading");
+            
             spoogle.AddLevel(10, new Ability[3] { ablate0, vomit0, concatenation0 }, 0);
             spoogle.AddLevel(12, new Ability[3] { ablate1, vomit1, concatenation1 }, 1);
             spoogle.AddLevel(13, new Ability[3] { ablate2, vomit2, concatenation2 }, 2);

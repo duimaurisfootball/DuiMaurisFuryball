@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Dui_Mauris_Furyball.CustomEffects
+﻿namespace Dui_Mauris_Furyball.CustomEffects
 {
     internal class BismuthCostReroll : EffectSO
     {
@@ -20,8 +16,8 @@ namespace Dui_Mauris_Furyball.CustomEffects
                         ab.cost = new ManaColorSO[oldcost.Length];
                         for (int i = 0; i < oldcost.Length; i++)
                         {
-                                exitAmount++;
-                                ab.cost[i] = _newCosts[UnityEngine.Random.Range(0, _newCosts.Count)];
+                            exitAmount++;
+                            ab.cost[i] = _newCosts[UnityEngine.Random.Range(0, _newCosts.Count)];
                         }
                     }
                 }

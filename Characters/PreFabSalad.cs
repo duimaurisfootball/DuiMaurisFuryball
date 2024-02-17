@@ -1,6 +1,4 @@
-﻿using Dui_Mauris_Furyball.CustomEffects;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public static class PreFabSalad
     {
@@ -9,12 +7,14 @@ namespace Dui_Mauris_Furyball
         {
             //stored values for metallurgy
             var setMetallurgy = ScriptableObject.CreateInstance<CasterStoredValueSetByExitValueEffect>();
-            setMetallurgy._valueName = (UnitStoredValueNames)258384;
+            setMetallurgy._valueName = (UnitStoredValueNames)258385;
             setMetallurgy._randomBetweenEntryAndPrevious = true;
 
             //check for that doller doller bayb
-            var CheckCash = ScriptableObject.CreateInstance<CheckStoredValuePercentageEffect>();
-            CheckCash._returnPercentage = true;
+            var checkCash = ScriptableObject.CreateInstance<CheckStoredValuePercentageEffect>();
+            checkCash._returnPercentage = true;
+            checkCash._valueName = (UnitStoredValueNames)258385;
+
 
             //damage and shield and health exit valyou
             var MetalDamage = ScriptableObject.CreateInstance<DamageEffect>();
@@ -28,41 +28,36 @@ namespace Dui_Mauris_Furyball
             smite._visuals = LoadedAssetsHandler.GetEnemyAbility("RapturousReverberation_A").visuals;
 
             //custom passives
-            PerformEffectPassiveAbility Metallurgy = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+            var Metallurgy = ScriptableObject.CreateInstance<Connection_PerformEffectPassiveAbility>();
             Metallurgy._passiveName = "Metallurgy";
             Metallurgy.type = (PassiveAbilityTypes)24821384;
             Metallurgy.passiveIcon = ResourceLoader.LoadSprite("Metallurgy");
             Metallurgy._enemyDescription = "This enemy's stats are based around this number.";
             Metallurgy._characterDescription = "This party member's stats are based around this number.";
-            Metallurgy.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+            Metallurgy.connectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[]
                 {
                     new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 50, null, Slots.Self),
                     new(setMetallurgy, 83, null, Slots.Self),
                 });
-            Metallurgy._triggerOn = new TriggerCalls[]
-                {
-                    TriggerCalls.OnFirstTurnStart
-                };
+            Metallurgy._triggerOn = new TriggerCalls[0];
 
-            PerformEffectPassiveAbility Penalty = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+            var Penalty = ScriptableObject.CreateInstance<Connection_PerformEffectPassiveAbility>();
             Penalty._passiveName = "Questioner's Penalty";
             Penalty.type = (PassiveAbilityTypes)24862135;
             Penalty.passiveIcon = ResourceLoader.LoadSprite("Penalty");
             Penalty._enemyDescription = "It is hard for a rich man to enter into the kingdom of heaven.";
             Penalty._characterDescription = "It is hard for a rich man to enter into the kingdom of heaven.";
-            Penalty.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+            Penalty.connectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[]
                 {
-
+                    new(checkCash, 83, null, Slots.Self),
+                    new(ScriptableObject.CreateInstance<ApplyCurseOnPercentageWithExitValueEffect>(), 1, null, Slots.Self),
+                    new(smite, 1, null, Slots.Self, ScriptableObject.CreateInstance<PreviousEffectCondition>()),
                 });
-            Penalty._triggerOn = new TriggerCalls[]
-                {
-
-                    TriggerCalls.OnFirstTurnStart
-                };
+            Penalty._triggerOn = new TriggerCalls[0];
 
             //Salad Basics
             Character salad2 = new Character();
-            Debug.Log("loading");
+            
             salad2.name = "Pre-Fab Salad";
             salad2.healthColor = Pigments.Purple;
             salad2.entityID = (EntityIDs)258995;
@@ -89,34 +84,33 @@ namespace Dui_Mauris_Furyball
 
 
             IDetour Metallurgies = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
-                typeof(Salad).GetMethod("AddStoredValueName", ~BindingFlags.Default));
+                typeof(PreFabSalad).GetMethod("AddStoredValueName", ~BindingFlags.Default));
 
             //copper and rhodium
-            Ability copperAndRhodium = new Ability();
+            var copperAndRhodium = new Ability();
             copperAndRhodium.name = "Copper and Rhodium";
             copperAndRhodium.description = "Deal damage equal to 28% of Metallurgy to the opposing enemy.";
             copperAndRhodium.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.Yellow };
             copperAndRhodium.sprite = ResourceLoader.LoadSprite("CopperAndRhodium");
             copperAndRhodium.effects = new Effect[]
                 {
-                    new(CheckCash, 28, null, Slots.Front),
+                    new(checkCash, 28, null, Slots.Front),
                     new(MetalDamage, 1, IntentType.Damage_7_10, Slots.Front),
                 };
             copperAndRhodium.animationTarget = Slots.Front;
             copperAndRhodium.visuals = LoadedAssetsHandler.GetCharacterAbility("Skewer_1_A").visuals;
 
-
             //titanium and iridium
-            Ability titaniumAndIridium = new Ability();
+            var titaniumAndIridium = new Ability();
             titaniumAndIridium.name = "Titanium and Iridium";
             titaniumAndIridium.description = "Deal damage equal to 15% of Metallurgy to the left and right enemies. Apply shield equal to 18% of Metallurgy to this position.";
             titaniumAndIridium.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.Blue };
             titaniumAndIridium.sprite = ResourceLoader.LoadSprite("TitaniumAndIridium");
             titaniumAndIridium.effects = new Effect[]
                 {
-                    new(CheckCash, 15, null, Slots.Self),
+                    new(checkCash, 15, null, Slots.Self),
                     new(MetalDamage, 1, IntentType.Damage_7_10, Slots.LeftRight),
-                    new(CheckCash, 18, null, Slots.Self),
+                    new(checkCash, 18, null, Slots.Self),
                     new(MetalShield, 1, IntentType.Field_Shield, Slots.Self),
                 };
             titaniumAndIridium.animationTarget = Slots.Self;
@@ -127,22 +121,25 @@ namespace Dui_Mauris_Furyball
             Brevious.wasSuccessful = false;
 
             //mercury and technetium
-            Ability mercuryAndTechnetium = new Ability();
+            var mercuryAndTechnetium = new Ability();
             mercuryAndTechnetium.name = "Mercury and Technetium";
             mercuryAndTechnetium.description = "Inflict scars to the opposing enemy equal to 10% of Metallurgy.";
             mercuryAndTechnetium.cost = new ManaColorSO[] { Pigments.Red, Pigments.Purple };
             mercuryAndTechnetium.sprite = ResourceLoader.LoadSprite("MercuryAndTechnetium");
             mercuryAndTechnetium.effects = new Effect[]
-                { 
-                    new(CheckCash, 10, null, Slots.Front),
+                {
+                    new(checkCash, 10, null, Slots.Front),
                     new(ScriptableObject.CreateInstance<MetallurgicalScars>(), 1, IntentType.Status_Scars, Slots.Front),
                     new(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, null, Slots.Front, Brevious),
                 };
             mercuryAndTechnetium.animationTarget = Slots.Front;
             mercuryAndTechnetium.visuals = LoadedAssetsHandler.GetCharacterAbility("Fumes_1_A").visuals;
 
-            Debug.Log("loading");
-            salad2.AddLevel(30, new Ability[3] { titaniumAndIridium, copperAndRhodium, mercuryAndTechnetium }, 0);
+            
+            salad2.AddLevel(30, new Ability[3] { copperAndRhodium, titaniumAndIridium, mercuryAndTechnetium }, 0);
+            salad2.levels[0].rankAbilities[0].ability.specialStoredValue = (UnitStoredValueNames)258385;
+            salad2.levels[0].rankAbilities[1].ability.specialStoredValue = (UnitStoredValueNames)258385;
+            salad2.levels[0].rankAbilities[2].ability.specialStoredValue = (UnitStoredValueNames)258385;
             salad2.AddCharacter();
 
             Debug.Log("It's working! It's working! | Dui Mauris Furyball | Pre-Fab Salad");
@@ -155,7 +152,7 @@ namespace Dui_Mauris_Furyball
         {
             Color yellow = Color.yellow;
             string str1;
-            if (storedValue == (UnitStoredValueNames)258384)
+            if (storedValue == (UnitStoredValueNames)258385)
             {
                 if (value <= 0)
                 {
@@ -163,7 +160,7 @@ namespace Dui_Mauris_Furyball
                 }
                 else
                 {
-                    string str2 = "Metallurgy" + string.Format(" +{0}", (object)value);
+                    string str2 = "Metallurgy" + string.Format(" {0}", (object)value);
                     string str3 = "<color=#" + ColorUtility.ToHtmlStringRGB(Color.yellow) + ">";
                     string str4 = "</color>";
                     str1 = str3 + str2 + str4;
@@ -173,6 +170,6 @@ namespace Dui_Mauris_Furyball
                 str1 = orig(self, storedValue, value);
             return str1;
         }
-        
+
     }
 }

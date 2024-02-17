@@ -1,7 +1,4 @@
-﻿using Dui_Mauris_Furyball.CustomEffects;
-using Dui_Mauris_Furyball.ExtraStoredValues;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public static class Felix
     {
@@ -123,21 +120,18 @@ namespace Dui_Mauris_Furyball
             chaosHealth._healthColors = new ManaColorSO[] { Pigments.Red, Pigments.Blue, Pigments.Yellow, Pigments.Purple };
 
 
-            PerformEffectPassiveAbility Chaos = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+            var Chaos = ScriptableObject.CreateInstance<Connection_PerformEffectPassiveAbility>();
             Chaos._passiveName = "Chaos";
-            Chaos.type = (PassiveAbilityTypes)2786774;
+            Chaos.type = (PassiveAbilityTypes)2789774;
             Chaos.passiveIcon = ResourceLoader.LoadSprite("chaos");
-            Chaos._enemyDescription = "This enemy's stats are based around the number of coins at the beginning of combat.";
+            Chaos._enemyDescription = "This enemy's health is randomized at the start of combat.";
             Chaos._characterDescription = "This party member's health and costs are randomized at the start of combat.";
-            Chaos.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+            Chaos.connectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[]
                 {
                     new Effect(chaosHealth, 1, null, Slots.Self),
                     new Effect(ScriptableObject.CreateInstance<CostRerollEffect>(), 1, null, Slots.Self),
                 });
-            Chaos._triggerOn = new TriggerCalls[]
-                {
-                TriggerCalls.OnCombatStart
-                };
+            Chaos._triggerOn = new TriggerCalls[0];
 
             var slapy = ScriptableObject.CreateInstance<RandomDamageBetweenPreviousAndEntryEffect>();
             slapy._deathType = DeathType.Slap;
@@ -159,7 +153,7 @@ namespace Dui_Mauris_Furyball
 
             //Vandander Basics
             Character felix = new Character();
-            Debug.Log("loading");
+            
             felix.name = "Felix";
             felix.healthColor = Pigments.Green;
             felix.entityID = (EntityIDs)5455921;
@@ -223,8 +217,69 @@ namespace Dui_Mauris_Furyball
             pendulumDamage._valueNameBottom = (UnitStoredValueNames)222764;
 
 
+            //butterfly
+            var butterfly0 = new AbilityAdvanced();
+            butterfly0.name = "Tummy Butterfly";
+            butterfly0.description = "Heal this party member and Right ally 3-4 health. Decrease this ability's minimum healing by 1-2.";
+            butterfly0.cost = new ManaColorSO[] { Pigments.Green, Pigments.Green };
+            butterfly0.sprite = ResourceLoader.LoadSprite("butterflies");
+            butterfly0.effects = new Effect[]
+                {
+                    new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 3, null, Slots.Self),
+                    new(butterflyHeal, 4, IntentType.Heal_1_4, Slots.SlotTarget(new int[] { 0, 1 }, true)),
+                    new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self),
+                    new(butterflyMinDown, 2, IntentType.Misc_State_Sit, Slots.Self),
+                    new(moveTheClockForward, 1, null, Slots.Self),
+                };
+            butterfly0.animationTarget = Slots.Self;
+            butterfly0.visuals = LoadedAssetsHandler.GetCharacterAbility("WholeAgain_1_A").visuals;
+            var butterfly0_a = butterfly0.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var butterfly0_SO);
+            butterfly0_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+            };
+
+            var butterfly1 = butterfly0.DuplicateAdvanced();
+            butterfly1.name = "Incense Butterfly";
+            butterfly1.description = "Heal this party member and Right ally 5-6 health. Decrease this ability's minimum healing by 1-2.";
+            butterfly1.effects[0]._entryVariable = 5;
+            butterfly1.effects[1]._entryVariable = 6;
+            butterfly1.effects[1]._intent = IntentType.Heal_5_10;
+            var butterfly1_a = butterfly1.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var butterfly1_SO);
+            butterfly1_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+            };
+
+            var butterfly2 = butterfly1.DuplicateAdvanced();
+            butterfly2.name = "Monarch Butterfly";
+            butterfly2.description = "Heal this party member and Right ally 7-8 health. Decrease this ability's minimum healing by 1-2.";
+            butterfly2.effects[0]._entryVariable = 7;
+            butterfly2.effects[1]._entryVariable = 8;
+            var butterfly2_a = butterfly2.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var butterfly2_SO);
+            butterfly2_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+            };
+
+            var butterfly3 = butterfly2.DuplicateAdvanced();
+            butterfly3.name = "The Butterfly Effect";
+            butterfly3.description = "Heal this party member and Right ally 9-10 health. Decrease this ability's minimum healing by 1-2.";
+            butterfly3.effects[0]._entryVariable = 9;
+            butterfly3.effects[1]._entryVariable = 10;
+            var butterfly3_a = butterfly3.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var butterfly3_SO);
+            butterfly3_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+            };
+
+
             //determinism
-            Ability determinism0 = new Ability();
+            var determinism0 = new AbilityAdvanced();
             determinism0.name = "Fast Determinism";
             determinism0.description = "Reroll this party member's costs. Increase butterfly max healing by 0-2. Increase pendulum max damage by 0-2.";
             determinism0.cost = new ManaColorSO[] { Pigments.Green };
@@ -240,65 +295,60 @@ namespace Dui_Mauris_Furyball
                 };
             determinism0.animationTarget = Slots.Self;
             determinism0.visuals = LoadedAssetsHandler.GetCharacterAbility("Slap_A").visuals;
+            var determinism0_a = determinism0.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var determinism0_SO);
+            determinism0_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Ability determinism1 = determinism0.Duplicate();
+            var determinism1 = determinism0.DuplicateAdvanced();
             determinism1.name = "Broken Determinism";
             determinism1.description = "Reroll this party member's costs. Increase butterfly max healing by 0-3. Increase pendulum max damage by 0-3.";
             determinism1.effects[2]._entryVariable = 3;
             determinism1.effects[4]._entryVariable = 3;
+            var determinism1_a = determinism1.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var determinism1_SO);
+            determinism1_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Ability determinism2 = determinism1.Duplicate();
+            var determinism2 = determinism1.DuplicateAdvanced();
             determinism2.name = "Slow Determinism";
             determinism2.description = "Reroll this party member's costs. Increase butterfly max healing by 0-4. Increase pendulum max damage by 0-4.";
             determinism2.effects[2]._entryVariable = 4;
             determinism2.effects[4]._entryVariable = 4;
+            var determinism2_a = determinism2.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var determinism2_SO);
+            determinism2_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Ability determinism3 = determinism2.Duplicate();
+            var determinism3 = determinism2.DuplicateAdvanced();
             determinism3.name = "Stopped Determinism";
             determinism3.description = "Reroll this party member's costs. Increase butterfly max healing by 1-4. Increase pendulum max damage by 1-4.";
             determinism3.effects[1]._entryVariable = 1;
             determinism3.effects[3]._entryVariable = 1;
-
-
-            //butterfly
-            Ability butterfly0 = new Ability();
-            butterfly0.name = "Tummy Butterfly";
-            butterfly0.description = "Heal this party member and Right ally 2-3 health. Decrease this ability's minimum healing by 1-2.";
-            butterfly0.cost = new ManaColorSO[] { Pigments.Green, Pigments.Green };
-            butterfly0.sprite = ResourceLoader.LoadSprite("butterflies");
-            butterfly0.effects = new Effect[]
-                {
-                    new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 2, null, Slots.Self),
-                    new(butterflyHeal, 3, IntentType.Heal_1_4, Slots.SlotTarget(new int[] { 0, 1 }, true)),
-                    new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 1, null, Slots.Self),
-                    new(butterflyMinDown, 2, IntentType.Misc_State_Sit, Slots.Self),
-                    new(moveTheClockForward, 1, null, Slots.Self),
-                };
-            butterfly0.animationTarget = Slots.Self;
-            butterfly0.visuals = LoadedAssetsHandler.GetCharacterAbility("WholeAgain_1_A").visuals;
-
-            Ability butterfly1 = butterfly0.Duplicate();
-            butterfly1.name = "Incense Butterfly";
-            butterfly1.description = "Heal this party member and Right ally 4-5 health. Decrease this ability's minimum healing by 1-2.";
-            butterfly1.effects[0]._entryVariable = 4;
-            butterfly1.effects[1]._entryVariable = 5;
-            butterfly1.effects[1]._intent = IntentType.Heal_5_10;
-
-            Ability butterfly2 = butterfly1.Duplicate();
-            butterfly2.name = "Monarch Butterfly";
-            butterfly2.description = "Heal this party member and Right ally 6-7 health. Decrease this ability's minimum healing by 1-2.";
-            butterfly2.effects[0]._entryVariable = 6;
-            butterfly2.effects[1]._entryVariable = 7;
-
-            Ability butterfly3 = butterfly2.Duplicate();
-            butterfly3.name = "The Butterfly Effect";
-            butterfly3.description = "Heal this party member and Right ally 8-9 health. Decrease this ability's minimum healing by 1-2.";
-            butterfly3.effects[0]._entryVariable = 8;
-            butterfly3.effects[1]._entryVariable = 9;
+            var determinism3_a = determinism3.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var determinism3_SO);
+            determinism3_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222761,
+                (UnitStoredValueNames)222762,
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
 
             //pendulum
-            Ability pendulum0 = new Ability();
+            var pendulum0 = new AbilityAdvanced();
             pendulum0.name = "Grandfather Pendulum";
             pendulum0.description = "Deal 6-7 damage to the Opposing enemy. Decrease this ability's minimum damage by 2-3.";
             pendulum0.cost = new ManaColorSO[] { Pigments.Green, Pigments.Green, Pigments.Green };
@@ -313,32 +363,56 @@ namespace Dui_Mauris_Furyball
                 };
             pendulum0.animationTarget = Slots.Front;
             pendulum0.visuals = LoadedAssetsHandler.GetEnemyAbility("Extrusion_A").visuals;
+            var pendulum0_a = pendulum0.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var pendulum0_SO);
+            pendulum0_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Ability pendulum1 = pendulum0.Duplicate();
+            var pendulum1 = pendulum0.DuplicateAdvanced();
             pendulum1.name = "Foucalt Pendulum";
             pendulum1.description = "Deal 8-9 damage to the Opposing enemy. Decrease this ability's minimum damage by 2-3.";
             pendulum1.effects[0]._entryVariable = 8;
             pendulum1.effects[1]._entryVariable = 9;
             pendulum1.effects[1]._intent = IntentType.Damage_7_10;
+            var pendulum1_a = pendulum1.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var pendulum1_SO);
+            pendulum1_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Ability pendulum2 = pendulum1.Duplicate();
+            var pendulum2 = pendulum1.DuplicateAdvanced();
             pendulum2.name = "Damped Pendulum";
             pendulum2.description = "Deal 11-12 damage to the Opposing enemy. Decrease this ability's minimum damage by 2-3.";
             pendulum2.effects[0]._entryVariable = 11;
             pendulum2.effects[1]._entryVariable = 12;
             pendulum2.effects[1]._intent = IntentType.Damage_11_15;
+            var pendulum2_a = pendulum2.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var pendulum2_SO);
+            pendulum2_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Ability pendulum3 = pendulum2.Duplicate();
+            var pendulum3 = pendulum2.DuplicateAdvanced();
             pendulum3.name = "Double Pendulum";
             pendulum3.description = "Deal 13-14 damage to the Opposing enemy. Decrease this ability's minimum damage by 2-3.";
             pendulum3.effects[0]._entryVariable = 13;
             pendulum3.effects[1]._entryVariable = 14;
+            var pendulum3_a = pendulum3.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var pendulum3_SO);
+            pendulum3_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
 
-            Debug.Log("loading");
-            felix.AddLevel(12, new Ability[3] { butterfly0, determinism0, pendulum0 }, 0);
-            felix.AddLevel(15, new Ability[3] { butterfly1, determinism1, pendulum1 }, 1);
-            felix.AddLevel(17, new Ability[3] { butterfly2, determinism2, pendulum2 }, 2);
-            felix.AddLevel(19, new Ability[3] { butterfly3, determinism3, pendulum3 }, 3);
+            
+            felix.AddLevelWithCustomAbilities(12, [butterfly0_a, determinism0_a, pendulum0_a], 0);
+            felix.AddLevelWithCustomAbilities(15, [butterfly1_a, determinism1_a, pendulum1_a], 1);
+            felix.AddLevelWithCustomAbilities(17, [butterfly2_a, determinism2_a, pendulum2_a], 2);
+            felix.AddLevelWithCustomAbilities(19, [butterfly3_a, determinism3_a, pendulum3_a], 3);
             felix.AddCharacter();
 
             //
@@ -366,9 +440,9 @@ namespace Dui_Mauris_Furyball
             //
 
             IDetour BellMin = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
-                typeof(BellMinimumStoredValue).GetMethod("AddStoredValueName", ~BindingFlags.Default)); 
+                typeof(BellMinimumStoredValue).GetMethod("AddStoredValueName", ~BindingFlags.Default));
             IDetour BellMax = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
-                typeof(BellMaximumStoredValue).GetMethod("AddStoredValueName", ~BindingFlags.Default)); 
+                typeof(BellMaximumStoredValue).GetMethod("AddStoredValueName", ~BindingFlags.Default));
 
             //bell values
             var bellUp = ScriptableObject.CreateInstance<CasterStoredValueChangeEffect>();
@@ -384,7 +458,7 @@ namespace Dui_Mauris_Furyball
             bellDamage._valueNameBottom = (UnitStoredValueNames)555762;
 
             //ability
-            Ability ring = new Ability();
+            var ring = new AbilityAdvanced();
             ring.name = "Dead Ring";
             ring.description = "Deal 6-7 damage to the Opposing enemy. Decrease the minimum damage of this ability by 1. Increase the maximum damage of this ability by 2.";
             ring.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Red, Pigments.Yellow), Pigments.SplitPigment(Pigments.Red, Pigments.Blue) };
@@ -398,6 +472,14 @@ namespace Dui_Mauris_Furyball
                 };
             ring.animationTarget = Slots.Front;
             ring.visuals = LoadedAssetsHandler.GetEnemyAbility("RingABell_A").visuals;
+            var ring_a = ring.CharacterAdvancedAbility<MultiSpecialStoredValueAbilitySO>(out var ring_SO);
+            ring_SO.extraStoredValues = new UnitStoredValueNames[]
+            {
+                (UnitStoredValueNames)222763,
+                (UnitStoredValueNames)222764,
+            };
+
+
             ExtraAbility_Wearable_SMS theyAreBells = ScriptableObject.CreateInstance<ExtraAbility_Wearable_SMS>();
             theyAreBells._extraAbility = ring.CharacterAbility();
 
@@ -415,7 +497,12 @@ namespace Dui_Mauris_Furyball
             {
                 theyAreBells
             };
-            tollBell.AddItem();
+            Connection_PerformEffectPassiveAbility connection_PerformEffectPassiveAbility = LoadedAssetsHandler.GetCharcater("Doll_CH").passiveAbilities[0] as Connection_PerformEffectPassiveAbility;
+            CasterAddRandomExtraAbilityEffect casterAddRandomExtraAbilityEffect = connection_PerformEffectPassiveAbility.connectionEffects[1].effect as CasterAddRandomExtraAbilityEffect;
+            casterAddRandomExtraAbilityEffect._extraData = new List<ExtraAbility_Wearable_SMS>(casterAddRandomExtraAbilityEffect._extraData)
+            {
+                theyAreBells
+            }.ToArray();
 
             FoolItemPairs FelixPair = new FoolItemPairs(felix, tollBell, bowlingBall);
             FelixPair.Add();

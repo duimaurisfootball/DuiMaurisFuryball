@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     [HarmonyPatch]
     public static class WillApplyDamagePatch

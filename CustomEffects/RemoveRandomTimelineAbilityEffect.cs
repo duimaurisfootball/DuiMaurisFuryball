@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Dui_Mauris_Furyball.CustomEffects
+﻿namespace Dui_Mauris_Furyball
 {
     public class RemoveRandomTimelineAbilityEffect : EffectSO
     {
@@ -30,7 +28,7 @@ namespace Dui_Mauris_Furyball.CustomEffects
                 EnemyCombat unit = stats.TryGetEnemyOnField(targetSlotInfo2.Unit.ID);
                 exitAmount += stats.timeline.TryRemoveRandomEnemyTurns(unit, entryVariable);
             }
-            
+
 
             return exitAmount > 0;
         }

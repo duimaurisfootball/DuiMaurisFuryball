@@ -12,7 +12,7 @@
             {
                 foreach (var ab in cc.CombatAbilities)
                 {
-                    
+
                     if (ab.cost.Length > 0)
                     {
                         var oldcost = ab.cost;
