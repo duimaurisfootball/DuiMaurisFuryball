@@ -55,7 +55,7 @@
             rodney.appearsInShops = true;
             rodney.hurtSound = LoadedAssetsHandler.GetCharcater("Clive_CH").damageSound;
             rodney.deathSound = LoadedAssetsHandler.GetCharcater("Clive_CH").deathSound;
-            rodney.dialogueSound = LoadedAssetsHandler.GetEnemy("SilverSuckle_EN").damageSound;
+            rodney.dialogueSound = LoadedAssetsHandler.GetCharcater("Clive_CH").dxSound;
             rodney.baseAbility = poke;
             rodney.isSupport = true;
             rodney.levels = new CharacterRankedData[4];

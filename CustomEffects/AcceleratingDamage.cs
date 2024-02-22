@@ -2,19 +2,14 @@
 {
     public class AcceleratingDamage : EffectSO
     {
-        [SerializeField]
         public DeathType _deathType = DeathType.Basic;
 
-        [SerializeField]
         public bool _usePreviousExitValue;
 
-        [SerializeField]
         public bool _ignoreShield;
 
-        [SerializeField]
         public bool _indirect;
 
-        [SerializeField]
         public bool _returnKillAsSuccess;
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)

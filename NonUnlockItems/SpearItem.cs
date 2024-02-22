@@ -60,7 +60,7 @@
             spear.unlockableID = (UnlockableID)999084;
             spear.namePopup = false;
             spear.itemPools = BrutalAPI.ItemPools.Shop;
-            spear.shopPrice = 5;
+            spear.shopPrice = 7;
             spear.startsLocked = false;
             spear.effects = new Effect[]
             {

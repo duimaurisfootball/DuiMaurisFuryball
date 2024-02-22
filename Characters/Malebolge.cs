@@ -58,7 +58,7 @@
             explodeDamage._usePreviousExitValue = true;
 
             //explode targets
-            Targetting_ByUnit_Side allEnemy = ScriptableObject.CreateInstance<Targetting_ByUnit_Side>();
+            var allEnemy = ScriptableObject.CreateInstance<Targetting_ByUnit_Side>();
             allEnemy.getAllies = false;
             allEnemy.getAllUnitSlots = false;
 

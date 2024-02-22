@@ -13,13 +13,15 @@
             pickledBeets.description = "Upon lucky pigment triggering, produce an additional red pigment.";
             pickledBeets.sprite = ResourceLoader.LoadSprite("PickledBeets", 1, null);
             pickledBeets.unlockableID = (UnlockableID)9002825;
-            pickledBeets.namePopup = false;
+            pickledBeets.namePopup = true;
             pickledBeets.itemPools = BrutalAPI.ItemPools.Shop;
             pickledBeets.shopPrice = 4;
+            pickledBeets.startsLocked = false;
             pickledBeets.effects = new Effect[]
             {
                 new(redGen, 1, null, Slots.Self),
             };
+            pickledBeets.AddItem();
         }
     }
 }

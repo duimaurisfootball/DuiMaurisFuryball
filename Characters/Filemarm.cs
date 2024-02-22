@@ -5,24 +5,22 @@
         public static void Add()
         {
             //Custom Passive
-            ChangePigmentGeneratorPool_Effect GrayGenerator = ScriptableObject.CreateInstance<ChangePigmentGeneratorPool_Effect>();
+            var GrayGenerator = ScriptableObject.CreateInstance<ChangePigmentGeneratorPool_Effect>();
             GrayGenerator._newPool = new ManaColorSO[1] { Pigments.Gray };
 
-            PerformEffectPassiveAbility Impunity = ScriptableObject.CreateInstance<PerformEffectPassiveAbility>();
+            var Impunity = ScriptableObject.CreateInstance<Connection_PerformEffectPassiveAbility>();
             Impunity._passiveName = "Impunity";
             Impunity.type = (PassiveAbilityTypes)843434;
             Impunity.passiveIcon = ResourceLoader.LoadSprite("Impunity");
             Impunity._enemyDescription = "The yellow pigment generator now generates gray pigment instead.";
             Impunity._characterDescription = "The yellow pigment generator now generates gray pigment instead.";
-            Impunity.effects = ExtensionMethods.ToEffectInfoArray(new Effect[]
+            Impunity.connectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[]
                 {
                     new Effect(GrayGenerator, 0, null, Slots.Self),
                 });
-            Impunity._triggerOn = new TriggerCalls[]
-                {
-                    TriggerCalls.OnCombatStart
-                };
-            
+            Impunity.disconnectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[0]);
+            Impunity._triggerOn = new TriggerCalls[0];
+
             //Alvinar Basics
             Character filemarm = new Character();
             

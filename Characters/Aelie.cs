@@ -36,7 +36,6 @@
 
             //Aelie Basics
             Character aelie = new Character();
-            
             aelie.name = "Aelie";
             aelie.healthColor = Pigments.Yellow;
             aelie.entityID = (EntityIDs)661266;

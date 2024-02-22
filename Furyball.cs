@@ -75,7 +75,7 @@ namespace Dui_Mauris_Furyball
             }
         }
     }
-    [BepInPlugin("Dui_Mauris_Football.Furyball", "Dui Mauris Furyball", "2.1.1")]
+    [BepInPlugin("Dui_Mauris_Football.Furyball", "Dui Mauris Furyball", "2.2.0")]
     public class Furyball : BaseUnityPlugin
     {
         public void Awake()
@@ -101,7 +101,7 @@ namespace Dui_Mauris_Furyball
             Naba.Add();
             Aelie.Add();
             Gomma.Add();
-
+            Hills.Add();
 
             //add items
             SpearItem.Add();
@@ -115,6 +115,7 @@ namespace Dui_Mauris_Furyball
             AppleCiderVinegar.Add();
             Sauerkraut.Add();
             PickledBeets.Add();
+            //TestItemRealFreeDownload.Add();
         }
     }
 }

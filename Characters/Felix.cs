@@ -131,6 +131,7 @@
                     new Effect(chaosHealth, 1, null, Slots.Self),
                     new Effect(ScriptableObject.CreateInstance<CostRerollEffect>(), 1, null, Slots.Self),
                 });
+            Chaos.disconnectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[0]);
             Chaos._triggerOn = new TriggerCalls[0];
 
             var slapy = ScriptableObject.CreateInstance<RandomDamageBetweenPreviousAndEntryEffect>();
@@ -168,7 +169,7 @@
             felix.baseAbility = slaph;
             felix.hurtSound = LoadedAssetsHandler.GetCharcater("Doll_CH").deathSound;
             felix.deathSound = LoadedAssetsHandler.GetCharcater("Doll_CH").deathSound;
-            felix.dialogueSound = LoadedAssetsHandler.GetEnemy("TaintedYolk_EN").deathSound;
+            felix.dialogueSound = LoadedAssetsHandler.GetCharcater("Doll_CH").deathSound;
             felix.isSupport = true;
             felix.passives = new BasePassiveAbilitySO[]
             {
@@ -438,7 +439,6 @@
             //
             //
             //
-
             IDetour BellMin = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
                 typeof(BellMinimumStoredValue).GetMethod("AddStoredValueName", ~BindingFlags.Default));
             IDetour BellMax = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),

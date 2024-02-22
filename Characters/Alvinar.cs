@@ -42,7 +42,7 @@
             alvinar.appearsInShops = true;
             alvinar.hurtSound = LoadedAssetsHandler.GetCharcater("Boyle_CH").damageSound;
             alvinar.deathSound = LoadedAssetsHandler.GetCharcater("Boyle_CH").deathSound;
-            alvinar.dialogueSound = LoadedAssetsHandler.GetEnemy("SilverSuckle_EN").damageSound;
+            alvinar.dialogueSound = LoadedAssetsHandler.GetCharcater("Boyle_CH").dxSound;
             alvinar.isSupport = false;
             alvinar.baseAbility = prepare;
             alvinar.passives = new BasePassiveAbilitySO[]

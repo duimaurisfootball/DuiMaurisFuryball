@@ -7,19 +7,21 @@
             var yellowGen = ScriptableObject.CreateInstance<GenerateColorManaEffect>();
             yellowGen.mana = Pigments.Yellow;
 
-            var pickledBeets = new FresnelItem();
-            pickledBeets.name = "Apple Cider Vinegar";
-            pickledBeets.flavorText = "\"Extra yellow pigment. With the mother!\"";
-            pickledBeets.description = "Upon lucky pigment triggering, produce an additional yellow pigment.";
-            pickledBeets.sprite = ResourceLoader.LoadSprite("AppleCiderVinegar", 1, null);
-            pickledBeets.unlockableID = (UnlockableID)9002827;
-            pickledBeets.namePopup = false;
-            pickledBeets.itemPools = BrutalAPI.ItemPools.Shop;
-            pickledBeets.shopPrice = 3;
-            pickledBeets.effects = new Effect[]
+            var vinegar = new FresnelItem();
+            vinegar.name = "Apple Cider Vinegar";
+            vinegar.flavorText = "\"Extra yellow pigment. With the mother!\"";
+            vinegar.description = "Upon lucky pigment triggering, produce an additional yellow pigment.";
+            vinegar.sprite = ResourceLoader.LoadSprite("AppleCiderVinegar", 1, null);
+            vinegar.unlockableID = (UnlockableID)9002827;
+            vinegar.namePopup = true;
+            vinegar.itemPools = BrutalAPI.ItemPools.Shop;
+            vinegar.shopPrice = 3;
+            vinegar.startsLocked = false;
+            vinegar.effects = new Effect[]
             {
                 new(yellowGen, 1, null, Slots.Self),
             };
+            vinegar.AddItem();
         }
     }
 }

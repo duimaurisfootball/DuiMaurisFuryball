@@ -61,13 +61,19 @@
 
         public static int AddEffectInfoToList(int _, EffectAction act, int effectIndex)
         {
-            act._caster.UnitExt().EffectInfosBeingPerformed.Add(act._effects[effectIndex]);
+            if (act._caster.UnitExt().EffectsBeingPerformed.Contains(act))
+            {
+                act._caster.UnitExt().EffectInfosBeingPerformed.Add(act._effects[effectIndex]);
+            }
             return _;
         }
 
         public static int RemoveEffectInfoFromList(int _, EffectAction act, int effectIndex)
         {
-            act._caster.UnitExt().EffectInfosBeingPerformed.Remove(act._effects[effectIndex]);
+            if (act._caster.UnitExt().EffectsBeingPerformed.Contains(act))
+            {
+                act._caster.UnitExt().EffectInfosBeingPerformed.Remove(act._effects[effectIndex]);
+            }
             return _;
         }
 

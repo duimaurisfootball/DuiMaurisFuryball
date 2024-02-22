@@ -1,7 +1,9 @@
 ﻿namespace Dui_Mauris_Furyball
 {
-    internal class ApplyShieldFromPreviousAddEntryEffect : EffectSO
+    public class ApplyShieldFromPreviousAddEntryEffect : EffectSO
     {
+
+        public BaseCombatTargettingSO _animationTarget;
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
@@ -11,7 +13,6 @@
             {
                 return false;
             }
-
             stats.slotStatusEffectDataBase.TryGetValue(SlotStatusEffectType.Shield, out var value);
             for (int i = 0; i < targets.Length; i++)
             {

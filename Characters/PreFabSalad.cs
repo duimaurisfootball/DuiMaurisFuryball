@@ -39,6 +39,7 @@
                     new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 50, null, Slots.Self),
                     new(setMetallurgy, 83, null, Slots.Self),
                 });
+            Metallurgy.disconnectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[0]);
             Metallurgy._triggerOn = new TriggerCalls[0];
 
             var Penalty = ScriptableObject.CreateInstance<Connection_PerformEffectPassiveAbility>();
@@ -53,6 +54,7 @@
                     new(ScriptableObject.CreateInstance<ApplyCurseOnPercentageWithExitValueEffect>(), 1, null, Slots.Self),
                     new(smite, 1, null, Slots.Self, ScriptableObject.CreateInstance<PreviousEffectCondition>()),
                 });
+            Penalty.disconnectionEffects = ExtensionMethods.ToEffectInfoArray(new Effect[0]);
             Penalty._triggerOn = new TriggerCalls[0];
 
             //Salad Basics
@@ -82,6 +84,18 @@
                 Penalty
             };
 
+            var copperDamage = ScriptableObject.CreateInstance<DamageFromPreviousAddEntryCustomAnimationsEffect_A>();
+            copperDamage._animationTarget = Slots.Front;
+
+            var titaniumDamage = ScriptableObject.CreateInstance<DamageFromPreviousAddEntryCustomAnimationsEffect_B>();
+            titaniumDamage._animationTarget = Slots.SlotTarget(new int[] { -1, 1 }, false);
+
+            var iridiumShield = ScriptableObject.CreateInstance<ApplyShieldFromPreviousAddEntryCustomAnimationsEffect>();
+            iridiumShield._animationTarget = Slots.Self;
+
+            var mercuryScars = ScriptableObject.CreateInstance<ApplyScarsFromPreviousAddEntryCustomAnimationsEffect>();
+            mercuryScars._animationTarget = Slots.Front;
+
 
             IDetour Metallurgies = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
                 typeof(PreFabSalad).GetMethod("AddStoredValueName", ~BindingFlags.Default));
@@ -89,53 +103,42 @@
             //copper and rhodium
             var copperAndRhodium = new Ability();
             copperAndRhodium.name = "Copper and Rhodium";
-            copperAndRhodium.description = "Deal damage equal to 28% of Metallurgy to the opposing enemy.";
+            copperAndRhodium.description = "Deal damage equal to 28% of Metallurgy + 3 to the opposing enemy.";
             copperAndRhodium.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.Yellow };
             copperAndRhodium.sprite = ResourceLoader.LoadSprite("CopperAndRhodium");
             copperAndRhodium.effects = new Effect[]
                 {
                     new(checkCash, 28, null, Slots.Front),
-                    new(MetalDamage, 1, IntentType.Damage_7_10, Slots.Front),
+                    new(copperDamage, 3, IntentType.Damage_7_10, Slots.Front),
                 };
-            copperAndRhodium.animationTarget = Slots.Front;
-            copperAndRhodium.visuals = LoadedAssetsHandler.GetCharacterAbility("Skewer_1_A").visuals;
 
             //titanium and iridium
             var titaniumAndIridium = new Ability();
             titaniumAndIridium.name = "Titanium and Iridium";
-            titaniumAndIridium.description = "Deal damage equal to 15% of Metallurgy to the left and right enemies. Apply shield equal to 18% of Metallurgy to this position.";
+            titaniumAndIridium.description = "Deal damage equal to 15% of Metallurgy + 2 to the left and right enemies. Apply shield equal to 18% of Metallurgy + 2 to this position.";
             titaniumAndIridium.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.Blue };
             titaniumAndIridium.sprite = ResourceLoader.LoadSprite("TitaniumAndIridium");
             titaniumAndIridium.effects = new Effect[]
                 {
                     new(checkCash, 15, null, Slots.Self),
-                    new(MetalDamage, 1, IntentType.Damage_7_10, Slots.LeftRight),
+                    new(titaniumDamage, 2, IntentType.Damage_7_10, Slots.LeftRight),
                     new(checkCash, 18, null, Slots.Self),
-                    new(MetalShield, 1, IntentType.Field_Shield, Slots.Self),
+                    new(iridiumShield, 2, IntentType.Field_Shield, Slots.Self),
                 };
-            titaniumAndIridium.animationTarget = Slots.Self;
-            titaniumAndIridium.visuals = LoadedAssetsHandler.GetCharacterAbility("Smokescreen_1_A").visuals;
-
-
-            var Brevious = ScriptableObject.CreateInstance<PreviousEffectCondition>();
-            Brevious.wasSuccessful = false;
 
             //mercury and technetium
             var mercuryAndTechnetium = new Ability();
             mercuryAndTechnetium.name = "Mercury and Technetium";
-            mercuryAndTechnetium.description = "Inflict scars to the opposing enemy equal to 10% of Metallurgy.";
+            mercuryAndTechnetium.description = "Inflict scars to the opposing enemy equal to 10% of Metallurgy + 1.";
             mercuryAndTechnetium.cost = new ManaColorSO[] { Pigments.Red, Pigments.Purple };
             mercuryAndTechnetium.sprite = ResourceLoader.LoadSprite("MercuryAndTechnetium");
             mercuryAndTechnetium.effects = new Effect[]
                 {
                     new(checkCash, 10, null, Slots.Front),
-                    new(ScriptableObject.CreateInstance<MetallurgicalScars>(), 1, IntentType.Status_Scars, Slots.Front),
-                    new(ScriptableObject.CreateInstance<ApplyScarsEffect>(), 1, null, Slots.Front, Brevious),
+                    new(mercuryScars, 1, IntentType.Status_Scars, Slots.Front),
                 };
-            mercuryAndTechnetium.animationTarget = Slots.Front;
-            mercuryAndTechnetium.visuals = LoadedAssetsHandler.GetCharacterAbility("Fumes_1_A").visuals;
 
-            
+
             salad2.AddLevel(30, new Ability[3] { copperAndRhodium, titaniumAndIridium, mercuryAndTechnetium }, 0);
             salad2.levels[0].rankAbilities[0].ability.specialStoredValue = (UnitStoredValueNames)258385;
             salad2.levels[0].rankAbilities[1].ability.specialStoredValue = (UnitStoredValueNames)258385;

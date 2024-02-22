@@ -7,19 +7,21 @@
             var purpleGen = ScriptableObject.CreateInstance<GenerateColorManaEffect>();
             purpleGen.mana = Pigments.Purple;
 
-            var pickledBeets = new FresnelItem();
-            pickledBeets.name = "Alum Salt";
-            pickledBeets.flavorText = "\"Extra purple pigment. Dries your mouth out.\"";
-            pickledBeets.description = "Upon lucky pigment triggering, produce an additional purple pigment.";
-            pickledBeets.sprite = ResourceLoader.LoadSprite("AlumSalt", 1, null);
-            pickledBeets.unlockableID = (UnlockableID)9002828;
-            pickledBeets.namePopup = false;
-            pickledBeets.itemPools = BrutalAPI.ItemPools.Shop;
-            pickledBeets.shopPrice = 3;
-            pickledBeets.effects = new Effect[]
+            var alumSalt = new FresnelItem();
+            alumSalt.name = "Alum Salt";
+            alumSalt.flavorText = "\"Extra purple pigment. Dries your mouth out.\"";
+            alumSalt.description = "Upon lucky pigment triggering, produce an additional purple pigment.";
+            alumSalt.sprite = ResourceLoader.LoadSprite("AlumSalt", 1, null);
+            alumSalt.unlockableID = (UnlockableID)9002828;
+            alumSalt.namePopup = true;
+            alumSalt.itemPools = BrutalAPI.ItemPools.Shop;
+            alumSalt.shopPrice = 3;
+            alumSalt.startsLocked = false;
+            alumSalt.effects = new Effect[]
             {
                 new(purpleGen, 1, null, Slots.Self),
             };
+            alumSalt.AddItem();
         }
     }
 }

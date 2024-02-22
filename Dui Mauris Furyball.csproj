@@ -24,6 +24,7 @@
 	  <None Remove="Sprites\balls.png" />
 	  <None Remove="Sprites\BavarianPretzel.png" />
 	  <None Remove="Sprites\BellAttack.png" />
+	  <None Remove="Sprites\bellow.png" />
 	  <None Remove="Sprites\bemagel back.png" />
 	  <None Remove="Sprites\bemagel front.png" />
 	  <None Remove="Sprites\bemagel overworld.png" />
@@ -303,10 +304,16 @@
 	  <None Remove="Sprites\gravity.png" />
 	  <None Remove="Sprites\GrayEssence.png" />
 	  <None Remove="Sprites\GunkMingGoa.png" />
+	  <None Remove="Sprites\HillsBack.png" />
+	  <None Remove="Sprites\HillsFront.png" />
+	  <None Remove="Sprites\HillsMenu.png" />
+	  <None Remove="Sprites\HillsOverworld.png" />
 	  <None Remove="Sprites\humorous.png" />
 	  <None Remove="Sprites\Hyperfixation.png" />
 	  <None Remove="Sprites\Impunity.png" />
+	  <None Remove="Sprites\InfiniteMirror.png" />
 	  <None Remove="Sprites\IridescentCrystal.png" />
+	  <None Remove="Sprites\ItemRealPNGFreeDownload2017.png" />
 	  <None Remove="Sprites\KaglasFinger.png" />
 	  <None Remove="Sprites\KaglasLeftLeg.png" />
 	  <None Remove="Sprites\KaglasRibcage.png" />
@@ -318,6 +325,7 @@
 	  <None Remove="Sprites\MalebolgeMenu.png" />
 	  <None Remove="Sprites\MalebolgeOverworld.png" />
 	  <None Remove="Sprites\MalebolgesSeveredHead.png" />
+	  <None Remove="Sprites\mania.png" />
 	  <None Remove="Sprites\MercuryAndTechnetium.png" />
 	  <None Remove="Sprites\Metallurgy.png" />
 	  <None Remove="Sprites\mobilizeAbility.png" />
@@ -336,6 +344,7 @@
 	  <None Remove="Sprites\PlaceholderFront.png" />
 	  <None Remove="Sprites\PlaceholderLocked.png" />
 	  <None Remove="Sprites\PlaceholderOverworld.png" />
+	  <None Remove="Sprites\PotOfGreed.png" />
 	  <None Remove="Sprites\prepare.png" />
 	  <None Remove="Sprites\revelation.png" />
 	  <None Remove="Sprites\reward.png" />
@@ -345,6 +354,7 @@
 	  <None Remove="Sprites\RodneyMenu.png" />
 	  <None Remove="Sprites\RodneyOverworld.png" />
 	  <None Remove="Sprites\rotation.png" />
+	  <None Remove="Sprites\runforthecube.png" />
 	  <None Remove="Sprites\Sacrilege.png" />
 	  <None Remove="Sprites\SaladBack.png" />
 	  <None Remove="Sprites\SaladFront.png" />
@@ -355,6 +365,7 @@
 	  <None Remove="Sprites\sands.png" />
 	  <None Remove="Sprites\Sauerkraut.png" />
 	  <None Remove="Sprites\scales.png" />
+	  <None Remove="Sprites\shatter.png" />
 	  <None Remove="Sprites\SickleCells.png" />
 	  <None Remove="Sprites\singing.png" />
 	  <None Remove="Sprites\slaph.png" />
@@ -458,6 +469,7 @@
 	  <EmbeddedResource Include="Sprites\AppleCiderVinegar.png" />
 	  <EmbeddedResource Include="Sprites\BavarianPretzel.png" />
 	  <EmbeddedResource Include="Sprites\BellAttack.png" />
+	  <EmbeddedResource Include="Sprites\bellow.png" />
 	  <EmbeddedResource Include="Sprites\BemagelFront.png" />
 	  <EmbeddedResource Include="Sprites\BigSplinter.png" />
 	  <EmbeddedResource Include="Sprites\bilge.png" />
@@ -563,10 +575,16 @@
 	  <EmbeddedResource Include="Sprites\GommaOverworld.png" />
 	  <EmbeddedResource Include="Sprites\GrayEssence.png" />
 	  <EmbeddedResource Include="Sprites\GunkMingGoa.png" />
+	  <EmbeddedResource Include="Sprites\HillsBack.png" />
+	  <EmbeddedResource Include="Sprites\HillsFront.png" />
+	  <EmbeddedResource Include="Sprites\HillsMenu.png" />
+	  <EmbeddedResource Include="Sprites\HillsOverworld.png" />
 	  <EmbeddedResource Include="Sprites\humorous.png" />
 	  <EmbeddedResource Include="Sprites\Hyperfixation.png" />
 	  <EmbeddedResource Include="Sprites\Impunity.png" />
+	  <EmbeddedResource Include="Sprites\InfiniteMirror.png" />
 	  <EmbeddedResource Include="Sprites\IridescentCrystal.png" />
+	  <EmbeddedResource Include="Sprites\ItemRealPNGFreeDownload2017.png" />
 	  <EmbeddedResource Include="Sprites\KaglasFinger.png" />
 	  <EmbeddedResource Include="Sprites\KaglasLeftLeg.png" />
 	  <EmbeddedResource Include="Sprites\KaglasRibcage.png" />
@@ -578,6 +596,7 @@
 	  <EmbeddedResource Include="Sprites\MalebolgeMenu.png" />
 	  <EmbeddedResource Include="Sprites\MalebolgeOverworld.png" />
 	  <EmbeddedResource Include="Sprites\MalebolgesSeveredHead.png" />
+	  <EmbeddedResource Include="Sprites\mania.png" />
 	  <EmbeddedResource Include="Sprites\MercuryAndTechnetium.png" />
 	  <EmbeddedResource Include="Sprites\Metallurgy.png" />
 	  <EmbeddedResource Include="Sprites\mobilizeAbility.png" />
@@ -596,6 +615,7 @@
 	  <EmbeddedResource Include="Sprites\PlaceholderFront.png" />
 	  <EmbeddedResource Include="Sprites\PlaceholderLocked.png" />
 	  <EmbeddedResource Include="Sprites\PlaceholderOverworld.png" />
+	  <EmbeddedResource Include="Sprites\PotOfGreed.png" />
 	  <EmbeddedResource Include="Sprites\prepare.png" />
 	  <EmbeddedResource Include="Sprites\revelation.png" />
 	  <EmbeddedResource Include="Sprites\reward.png" />
@@ -605,6 +625,7 @@
 	  <EmbeddedResource Include="Sprites\RodneyMenu.png" />
 	  <EmbeddedResource Include="Sprites\RodneyOverworld.png" />
 	  <EmbeddedResource Include="Sprites\rotation.png" />
+	  <EmbeddedResource Include="Sprites\runforthecube.png" />
 	  <EmbeddedResource Include="Sprites\Sacrilege.png" />
 	  <EmbeddedResource Include="Sprites\SaladBack.png" />
 	  <EmbeddedResource Include="Sprites\SaladFront.png" />
@@ -614,6 +635,7 @@
 	  <EmbeddedResource Include="Sprites\sands.png" />
 	  <EmbeddedResource Include="Sprites\Sauerkraut.png" />
 	  <EmbeddedResource Include="Sprites\scales.png" />
+	  <EmbeddedResource Include="Sprites\shatter.png" />
 	  <EmbeddedResource Include="Sprites\SickleCells.png" />
 	  <EmbeddedResource Include="Sprites\singing.png" />
 	  <EmbeddedResource Include="Sprites\slaph.png" />
