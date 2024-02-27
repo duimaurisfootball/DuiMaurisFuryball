@@ -222,7 +222,7 @@
             var kraken = new DoubleEffectItem();
             kraken.name = "The Kraken";
             kraken.flavorText = "\"The terror of the seven seas!\"";
-            kraken.description = "Add six additional attacks to the timeline every turn. Gain thrice as many coins at the end of combat.";
+            kraken.description = "Add 6 additional attacks to the timeline every turn. Gain thrice as many coins at the end of combat.";
             kraken.sprite = ResourceLoader.LoadSprite("kraken", 1, null);
             kraken.unlockableID = (UnlockableID)7728739;
             kraken.namePopup = true;

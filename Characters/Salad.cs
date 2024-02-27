@@ -91,6 +91,7 @@
             IDetour Metallurgies = new Hook(typeof(TooltipTextHandlerSO).GetMethod("ProcessStoredValue", ~BindingFlags.Default),
                 typeof(Salad).GetMethod("AddStoredValueName", ~BindingFlags.Default));
 
+
             //copper and rhodium
             var copperAndRhodium = new Ability();
             copperAndRhodium.name = "Copper and Rhodium";

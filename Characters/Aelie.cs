@@ -273,7 +273,6 @@
 
             FoolItemPairs AeliePair = new FoolItemPairs(aelie, brokenHourglass, liquidDust);
             AeliePair.Add();
-
             
             aelie.AddLevel(13, new Ability[3] { sand0, desiccate0, singing0 }, 0);
             aelie.AddLevel(16, new Ability[3] { sand1, desiccate1, singing1 }, 1);

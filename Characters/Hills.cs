@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-namespace Dui_Mauris_Furyball
+﻿namespace Dui_Mauris_Furyball
 {
     public class Hills
     {
@@ -38,7 +35,15 @@ namespace Dui_Mauris_Furyball
             insanity._damage = 6;
             insanity._extraTargets = Slots.Self;
             insanity._extraTargetsAttack = Slots.Front;
+            insanity._repeatChance = 70;
 
+            var insanity2 = ScriptableObject.CreateInstance<ManiaEffect>();
+            insanity2._sound = LoadedAssetsHandler.GetEnemy("Visage_Siblings_EN").deathSound;
+            insanity2._waitTime = 0;
+            insanity2._damage = 6;
+            insanity2._extraTargets = Slots.Self;
+            insanity2._extraTargetsAttack = Slots.Front;
+            insanity2._repeatChance = 80;
 
 
             //Bellow
@@ -108,34 +113,37 @@ namespace Dui_Mauris_Furyball
             //Mania
             var mania0 = new Ability();
             mania0.name = "Mania by Rolling";
-            mania0.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. Apply 1 scar to self. 60% chance to repeat this ability.";
+            mania0.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 90% chance to apply 1 scar to self. 70% chance to repeat this ability.";
             mania0.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.Red, Pigments.Red };
             mania0.sprite = ResourceLoader.LoadSprite("mania");
             mania0.effects = new Effect[]
             {
-                new(insanity, 100, IntentType.Damage_3_6, Slots.Front),
+                new(insanity, 90, IntentType.Damage_3_6, Slots.Front),
                 new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Mana_Consume, Slots.Front),
                 new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Swap_Sides, Slots.Front),
                 new(ScriptableObject.CreateInstance<ExtraVariableForNextEffect>(), 0, IntentType.Misc, Slots.Front),
             };
             mania0.animationTarget = Slots.Self;
-            mania0.visuals =
-            shatter0.visuals = LoadedAssetsHandler.GetCharacterAbility("Amalgam_1_A").visuals;
+            mania0.visuals = LoadedAssetsHandler.GetCharacterAbility("Amalgam_1_A").visuals;
 
             var mania1 = mania0.Duplicate();
             mania1.name = "Mania by Cooking";
-            mania1.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 75% chance to apply 1 scar to self. 60% chance to repeat this ability.";
+            mania1.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 75% chance to apply 1 scar to self. 70% chance to repeat this ability.";
+            mania1.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.Red, Pigments.SplitPigment( Pigments.Red, Pigments.Yellow ) };
             mania1.effects[0]._entryVariable = 75;
 
             var mania2 = mania1.Duplicate();
             mania2.name = "Mania by Wishing";
-            mania2.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 66% chance to apply 1 scar to self. 60% chance to repeat this ability.";
-            mania1.effects[0]._entryVariable = 66;
+            mania2.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 66% chance to apply 1 scar to self. 70% chance to repeat this ability.";
+            mania2.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red, Pigments.SplitPigment(Pigments.Red, Pigments.Yellow), Pigments.SplitPigment(Pigments.Red, Pigments.Yellow) };
+            mania2.effects[0]._entryVariable = 66;
 
             var mania3 = mania2.Duplicate();
             mania3.name = "Mania by Day, Mania by Night";
-            mania3.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 50% chance to apply 1 scar to self. 60% chance to repeat this ability.";
-            mania1.effects[0]._entryVariable = 50;
+            mania3.description = "Deal 6 damage to the Opposing enemy. Consume 1-2 pigment. Move self Left or Right. 50% chance to apply 1 scar to self. 80% chance to repeat this ability.";
+            mania3.cost = new ManaColorSO[] { Pigments.Red, Pigments.SplitPigment(Pigments.Red, Pigments.Yellow), Pigments.SplitPigment(Pigments.Red, Pigments.Yellow), Pigments.SplitPigment(Pigments.Red, Pigments.Yellow) };
+            mania3.effects[0]._effect = insanity2;
+            mania3.effects[0]._entryVariable = 50;
 
             //
             //
@@ -157,7 +165,7 @@ namespace Dui_Mauris_Furyball
 
             var infiniteMirror = new DoubleEffectItem();
             infiniteMirror.name = "Infinite Mirror";
-            infiniteMirror.flavorText = "\"Tree falling no one would hear\"";
+            infiniteMirror.flavorText = "\"Tree falling no one would hear.\"";
             infiniteMirror.description = "\"Slap\" is replaced with this party member's missing ability. Upon taking any damage, perform one of this party member's abilities and deal 1 indirect damage to them. 20% chance to increase the damage by 1. Continue until they are dead.";
             infiniteMirror.sprite = ResourceLoader.LoadSprite("InfiniteMirror", 1, null);
             infiniteMirror.unlockableID = (UnlockableID)1310501082;
@@ -186,8 +194,10 @@ namespace Dui_Mauris_Furyball
             //
             //
             //
-            var repeatEffect = ScriptableObject.CreateInstance<TheHorrorEffect>();
+            var repeatEffect = ScriptableObject.CreateInstance<UnboundedDamageEffect>();
             repeatEffect._repeatChance = 95;
+            repeatEffect._guaranteedRepeats = 1;
+            repeatEffect._multiplier = 1;
 
             var randomDamage = new Ability();
             randomDamage.name = "Run Forth";
@@ -198,6 +208,8 @@ namespace Dui_Mauris_Furyball
                 {
                     new(repeatEffect, 1, IntentType.Damage_1_2, Slots.Front)
                 };
+            randomDamage.animationTarget = Slots.Front;
+            randomDamage.visuals = LoadedAssetsHandler.GetEnemyAbility("FallingSkies_A").visuals;
 
             ExtraAbility_Wearable_SMS unbounded = ScriptableObject.CreateInstance<ExtraAbility_Wearable_SMS>();
             unbounded._extraAbility = randomDamage.CharacterAbility();
@@ -209,8 +221,7 @@ namespace Dui_Mauris_Furyball
             potOfGreed.sprite = ResourceLoader.LoadSprite("PotOfGreed", 1, null);
             potOfGreed.unlockableID = (UnlockableID)1310501083;
             potOfGreed.namePopup = false;
-            potOfGreed.itemPools = BrutalAPI.ItemPools.Shop;
-            potOfGreed.shopPrice = 6;
+            potOfGreed.itemPools = BrutalAPI.ItemPools.Treasure;
             potOfGreed.equippedModifiers = new WearableStaticModifierSetterSO[]
             {
                 unbounded

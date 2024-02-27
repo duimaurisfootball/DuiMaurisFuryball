@@ -89,7 +89,7 @@
             Ability vomit0 = new Ability();
             vomit0.name = "Vomit up Dinner";
             vomit0.description = "Increase Leaky by 1. Deal 1 self damage. Deal 1 indirect damage to the opposing enemy. 80% chance to refresh this party member.";
-            vomit0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Yellow, Pigments.Blue) };
+            vomit0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Blue, Pigments.Yellow) };
             vomit0.sprite = ResourceLoader.LoadSprite("vomit");
             vomit0.effects = new Effect[]
                 {
@@ -169,7 +169,7 @@
             Ability concatenation0 = new Ability();
             concatenation0.name = "Reduction Concatenation";
             concatenation0.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1 for every pigment consumed.";
-            concatenation0.cost = new ManaColorSO[] { Pigments.Yellow, Pigments.Yellow, Pigments.Yellow };
+            concatenation0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Purple, Pigments.Yellow), Pigments.SplitPigment(Pigments.Purple, Pigments.Yellow), Pigments.SplitPigment(Pigments.Purple, Pigments.Yellow) };
             concatenation0.sprite = ResourceLoader.LoadSprite("concatenation");
             concatenation0.effects = new Effect[]
                 {

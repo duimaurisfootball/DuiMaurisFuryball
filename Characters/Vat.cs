@@ -156,7 +156,8 @@
             vat.passives = new BasePassiveAbilitySO[]
             {
                 leaky2,
-                Humorous
+                Humorous,
+                Passives.Withering
             };
 
             //check for health color change

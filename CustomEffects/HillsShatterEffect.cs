@@ -9,11 +9,20 @@
             exitAmount = 0;
             foreach (TargetSlotInfo targetSlotInfo in targets)
             {
-                for (int i = 0; i < 1;)
+                int j = 0;
+                for (int i = 0; i < 1 && j < 1;)
                 {
                     if (!stats.combatSlots.SlotContainsSlotStatusEffect(targetSlotInfo.SlotID, targetSlotInfo.IsTargetCharacterSlot, SlotStatusEffectType.Shield))
                     {
                         i++;
+                    }
+                    if (targetSlotInfo.HasUnit && targetSlotInfo.Unit.CurrentHealth == 0)
+                    {
+                        j++;
+                    }
+                    if(!targetSlotInfo.HasUnit)
+                    {
+                        j++;
                     }
                     if (targetSlotInfo.HasUnit)
                     {

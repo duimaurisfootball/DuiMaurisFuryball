@@ -11,6 +11,7 @@ namespace Dui_Mauris_Furyball
         public int _damage = 0;
         public BaseCombatTargettingSO _extraTargets;
         public BaseCombatTargettingSO _extraTargetsAttack;
+        public int _repeatChance = 0;
 
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
@@ -35,11 +36,13 @@ namespace Dui_Mauris_Furyball
                         damageInfo = targetSlotInfo.Unit.Damage(amount, caster, DeathType.Basic, targetSlotOffset, true, true, false);
                         flag |= damageInfo.beenKilled;
                     }
-
-                    int manaConsumer = UnityEngine.Random.Range(1, 2);
                     JumpAnimationInformation jumpInfo = stats.GenerateUnitJumpInformation(caster.ID, caster.IsUnitCharacter);
                     string manaConsumedSound = stats.audioController.manaConsumedSound;
-                    stats.MainManaBar.ConsumeRandomMana(manaConsumer, jumpInfo, manaConsumedSound);
+                    stats.MainManaBar.ConsumeRandomMana(1, jumpInfo, manaConsumedSound);
+                    if (UnityEngine.Random.Range(0, 1) == 0)
+                    {
+                        stats.MainManaBar.ConsumeRandomMana(1, jumpInfo, manaConsumedSound);
+                    }
                 }
 
                 foreach (TargetSlotInfo targetSlotInfo1 in extraTargets)
@@ -106,7 +109,7 @@ namespace Dui_Mauris_Furyball
                         }
                     }
                 }
-                    if (60 < UnityEngine.Random.Range(0, 100))
+                    if (_repeatChance < UnityEngine.Random.Range(0, 100))
                 {
                     j++;
                 }

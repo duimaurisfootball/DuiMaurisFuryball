@@ -301,6 +301,9 @@
             LootItemProbability food39;
             food39.itemName = "ConjoinedFungi_TW";
             food39.probability = 10;
+            LootItemProbability food40;
+            food40.itemName = "PeanutOil_SW";
+            food40.probability = 7;
 
             var foodList = ScriptableObject.CreateInstance<ExtraLootListCheckLockedEffect>();
             foodList._lootableItems = new LootItemProbability[]
@@ -345,6 +348,7 @@
                 food37,
                 food38,
                 food39,
+                food40,
             };
 
             var cheesePlate = new EffectItem();

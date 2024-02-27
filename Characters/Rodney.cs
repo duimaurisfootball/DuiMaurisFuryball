@@ -144,7 +144,7 @@
             Ability tribulation0 = new Ability();
             tribulation0.name = "Little Tribulation";
             tribulation0.description = "Heal the right ally 7. Inflict curse to right ally.";
-            tribulation0.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red };
+            tribulation0.cost = new ManaColorSO[] { Pigments.Red, Pigments.Blue };
             tribulation0.sprite = ResourceLoader.LoadSprite("tribulation");
             tribulation0.effects = new Effect[]
                 {
@@ -175,7 +175,7 @@
             Ability veneration0 = new Ability();
             veneration0.name = "Distant Veneration";
             veneration0.description = "Heal the right ally 2. If the right ally is cursed, refresh them.";
-            veneration0.cost = new ManaColorSO[] { Pigments.Red, Pigments.Blue };
+            veneration0.cost = new ManaColorSO[] { Pigments.Red, Pigments.Red };
             veneration0.sprite = ResourceLoader.LoadSprite("veneration");
             veneration0.effects = new Effect[]
                 {

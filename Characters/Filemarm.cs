@@ -220,7 +220,7 @@
                 });
             grayEssence._triggerOn = new TriggerCalls[]
                 {
-                    TriggerCalls.OnFirstTurnStart,
+                    TriggerCalls.OnCombatStart,
                 };
 
             var giveGray = ScriptableObject.CreateInstance<ExtraPassiveAbility_Wearable_SMS>();
