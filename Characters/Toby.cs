@@ -141,7 +141,8 @@
 
             var popping2 = popping1.Duplicate();
             popping2.name = "Popping Skulls";
-            popping2.description = "Deal 4 damage to all enemies. Heal the Left and Right allies by an equivalent amount.";
+            popping2.description = "Deal 5 damage to all enemies. Heal the Left and Right allies by an equivalent amount.";
+            popping2.effects[0]._entryVariable = 5;
             popping2.effects[1]._target = Slots.SlotTarget(new int[] { -1, 1 }, true);
 
             var popping3 = popping2.Duplicate();

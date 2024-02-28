@@ -88,14 +88,14 @@
             //vomit
             Ability vomit0 = new Ability();
             vomit0.name = "Vomit up Dinner";
-            vomit0.description = "Increase Leaky by 1. Deal 1 self damage. Deal 1 indirect damage to the opposing enemy. 80% chance to refresh this party member.";
+            vomit0.description = "Increase Leaky by 1. Deal 1 self damage. Deal 2 indirect damage to the opposing enemy. 80% chance to refresh this party member.";
             vomit0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Blue, Pigments.Yellow) };
             vomit0.sprite = ResourceLoader.LoadSprite("vomit");
             vomit0.effects = new Effect[]
                 {
                     new (LeakinessUp, 1, null, Slots.Self),
                     new (ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Self),
-                    new (IndirectDamage, 1, IntentType.Damage_1_2, Slots.Front),
+                    new (IndirectDamage, 2, IntentType.Damage_1_2, Slots.Front),
                     new (ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(), 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(80)),
                 };
             vomit0.animationTarget = Slots.Self;
@@ -103,23 +103,23 @@
 
             Ability vomit1 = vomit0.Duplicate();
             vomit1.name = "Vomit up Lunch";
-            vomit1.description = "Increase Leaky by 1. Deal 1 self damage. Deal 2 indirect damage to the opposing enemy. 83% chance to refresh this party member.";
-            vomit1.effects[2]._entryVariable = 2;
+            vomit1.description = "Increase Leaky by 1. Deal 1 self damage. Deal 3 indirect damage to the opposing enemy. 83% chance to refresh this party member.";
+            vomit1.effects[2]._entryVariable = 3;
             vomit1.effects[3] = new Effect(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(),
                 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(83));
 
             Ability vomit2 = vomit1.Duplicate();
             vomit2.name = "Vomit up Breakfast";
-            vomit2.description = "Increase Leaky by 1. Deal 1 self damage. Deal 3 indirect damage to the opposing enemy. 88% chance to refresh this party member.";
-            vomit2.effects[2]._entryVariable = 3;
+            vomit2.description = "Increase Leaky by 1. Deal 1 self damage. Deal 4 indirect damage to the opposing enemy. 88% chance to refresh this party member.";
+            vomit2.effects[2]._entryVariable = 4;
             vomit0.effects[2]._intent = IntentType.Damage_3_6;
             vomit2.effects[3] = new Effect(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(),
                 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(88));
 
             Ability vomit3 = vomit2.Duplicate();
             vomit3.name = "Vomit up Yesterday's Dinner";
-            vomit3.description = "Increase Leaky by 1. Deal 1 self damage. Deal 4 indirect damage to the opposing enemy. 90% chance to refresh this party member.";
-            vomit3.effects[2]._entryVariable = 4;
+            vomit3.description = "Increase Leaky by 1. Deal 1 self damage. Deal 5 indirect damage to the opposing enemy. 90% chance to refresh this party member.";
+            vomit3.effects[2]._entryVariable = 5;
             vomit3.effects[3] = new Effect(ScriptableObject.CreateInstance<RefreshAbilityUseEffect>(),
                 1, IntentType.Other_Refresh, Slots.Self, Conditions.Chance(90));
 
