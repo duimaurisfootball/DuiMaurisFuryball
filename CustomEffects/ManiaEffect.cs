@@ -39,7 +39,7 @@ namespace Dui_Mauris_Furyball
                     JumpAnimationInformation jumpInfo = stats.GenerateUnitJumpInformation(caster.ID, caster.IsUnitCharacter);
                     string manaConsumedSound = stats.audioController.manaConsumedSound;
                     stats.MainManaBar.ConsumeRandomMana(1, jumpInfo, manaConsumedSound);
-                    if (UnityEngine.Random.Range(0, 1) == 0)
+                    if (UnityEngine.Random.Range(0, 2) == 0)
                     {
                         stats.MainManaBar.ConsumeRandomMana(1, jumpInfo, manaConsumedSound);
                     }

@@ -17,7 +17,7 @@
                     new(repeatEffect, 1, IntentType.Field_Shield, Slots.Self)
                 };
 
-            ExtraAbility_Wearable_SMS unbounded = ScriptableObject.CreateInstance<ExtraAbility_Wearable_SMS>();
+            var unbounded = ScriptableObject.CreateInstance<ExtraAbility_Wearable_SMS>();
             unbounded._extraAbility = randomShield.CharacterAbility();
 
             var deadCream = new EffectItem();

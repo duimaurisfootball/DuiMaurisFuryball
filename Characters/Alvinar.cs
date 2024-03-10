@@ -302,8 +302,32 @@
             food39.itemName = "ConjoinedFungi_TW";
             food39.probability = 10;
             LootItemProbability food40;
-            food40.itemName = "PeanutOil_SW";
-            food40.probability = 7;
+            food40.itemName = "MiracleBerry_SW";
+            food40.probability = 10;
+            LootItemProbability food41;
+            food41.itemName = "Sandvich_SW";
+            food41.probability = 20;
+            LootItemProbability food42;
+            food42.itemName = "MiracleBerry_SW";
+            food42.probability = 10;
+            LootItemProbability food43;
+            food43.itemName = "Cranes'Flesh_TW";
+            food43.probability = 14;
+            LootItemProbability food44;
+            food44.itemName = "MetabolicPigeons_TW";
+            food44.probability = 7;
+            LootItemProbability food45;
+            food45.itemName = "Prometheus_TW";
+            food45.probability = 16;
+            LootItemProbability food46;
+            food46.itemName = "PotassiumNightcap_TW";
+            food46.probability = 17;
+            LootItemProbability food47;
+            food47.itemName = "FunkyCornucopia_TW";
+            food47.probability = 18;
+            LootItemProbability food48;
+            food48.itemName = "NightOil_SW";
+            food48.probability = 8;
 
             var foodList = ScriptableObject.CreateInstance<ExtraLootListCheckLockedEffect>();
             foodList._lootableItems = new LootItemProbability[]
@@ -349,6 +373,14 @@
                 food38,
                 food39,
                 food40,
+                food41,
+                food42,
+                food43,
+                food44,
+                food45,
+                food46,
+                food47,
+                food48,
             };
 
             var cheesePlate = new EffectItem();

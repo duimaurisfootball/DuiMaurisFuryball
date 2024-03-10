@@ -204,6 +204,7 @@
 	  <None Remove="Sprites\BismuthSubsalicylate.png" />
 	  <None Remove="Sprites\bless.png" />
 	  <None Remove="Sprites\blood.png" />
+	  <None Remove="Sprites\BoiledPeanuts.png" />
 	  <None Remove="Sprites\BoneAndSkin.png" />
 	  <None Remove="Sprites\bonespurscopy.png" />
 	  <None Remove="Sprites\BowlingBall.png" />
@@ -221,6 +222,7 @@
 	  <None Remove="Sprites\collection.png" />
 	  <None Remove="Sprites\combust.png" />
 	  <None Remove="Sprites\concatenation.png" />
+	  <None Remove="Sprites\congeal.png" />
 	  <None Remove="Sprites\connoiseur.png" />
 	  <None Remove="Sprites\conviction.png" />
 	  <None Remove="Sprites\CopperAndRhodium.png" />
@@ -298,6 +300,10 @@
 	  <None Remove="Sprites\film.png" />
 	  <None Remove="Sprites\FireDamageIntent.png" />
 	  <None Remove="Sprites\forest.png" />
+	  <None Remove="Sprites\FormidoBack.png" />
+	  <None Remove="Sprites\FormidoFront.png" />
+	  <None Remove="Sprites\FormidoMenu.png" />
+	  <None Remove="Sprites\FormidoOverworld.png" />
 	  <None Remove="Sprites\ForWhomItTolls.png" />
 	  <None Remove="Sprites\FrenchKiss.png" />
 	  <None Remove="Sprites\frenzy.png" />
@@ -313,6 +319,10 @@
 	  <None Remove="Sprites\gravity.png" />
 	  <None Remove="Sprites\GrayEssence.png" />
 	  <None Remove="Sprites\GrayOil.png" />
+	  <None Remove="Sprites\GumBack.png" />
+	  <None Remove="Sprites\GumFront.png" />
+	  <None Remove="Sprites\GumMenu.png" />
+	  <None Remove="Sprites\GumOverworld.png" />
 	  <None Remove="Sprites\GunkMingGoa.png" />
 	  <None Remove="Sprites\HillsBack.png" />
 	  <None Remove="Sprites\HillsFront.png" />
@@ -366,6 +376,7 @@
 	  <None Remove="Sprites\PotOfGreed.png" />
 	  <None Remove="Sprites\prepare.png" />
 	  <None Remove="Sprites\projectObjection.png" />
+	  <None Remove="Sprites\reconfiguration.png" />
 	  <None Remove="Sprites\revelation.png" />
 	  <None Remove="Sprites\reward.png" />
 	  <None Remove="Sprites\RodneyBack.png" />
@@ -385,7 +396,9 @@
 	  <None Remove="Sprites\sands.png" />
 	  <None Remove="Sprites\Sauerkraut.png" />
 	  <None Remove="Sprites\scales.png" />
+	  <None Remove="Sprites\scum.png" />
 	  <None Remove="Sprites\shatter.png" />
+	  <None Remove="Sprites\shockTherapy.png" />
 	  <None Remove="Sprites\SickleCells.png" />
 	  <None Remove="Sprites\singing.png" />
 	  <None Remove="Sprites\slaph.png" />
@@ -408,6 +421,7 @@
 	  <None Remove="Sprites\SyrupOfIpecac.png" />
 	  <None Remove="Sprites\tango.png" />
 	  <None Remove="Sprites\temple.png" />
+	  <None Remove="Sprites\thunderstrike.png" />
 	  <None Remove="Sprites\TitaniumAndIridium.png" />
 	  <None Remove="Sprites\TobyBack.png" />
 	  <None Remove="Sprites\TobyFront.png" />
@@ -415,6 +429,7 @@
 	  <None Remove="Sprites\TobyOverworld.png" />
 	  <None Remove="Sprites\tribulation.png" />
 	  <None Remove="Sprites\UnboundDamageIntent.png" />
+	  <None Remove="Sprites\undone.png" />
 	  <None Remove="Sprites\vandala effect.png" />
 	  <None Remove="Sprites\vandalize.png" />
 	  <None Remove="Sprites\VandanderBackBasic.png" />
@@ -504,6 +519,7 @@
 	  <EmbeddedResource Include="Sprites\BismuthSubsalicylate.png" />
 	  <EmbeddedResource Include="Sprites\bless.png" />
 	  <EmbeddedResource Include="Sprites\blood.png" />
+	  <EmbeddedResource Include="Sprites\BoiledPeanuts.png" />
 	  <EmbeddedResource Include="Sprites\BoneAndSkin.png" />
 	  <EmbeddedResource Include="Sprites\bonespurscopy.png" />
 	  <EmbeddedResource Include="Sprites\BowlingBall.png" />
@@ -521,6 +537,7 @@
 	  <EmbeddedResource Include="Sprites\collection.png" />
 	  <EmbeddedResource Include="Sprites\combust.png" />
 	  <EmbeddedResource Include="Sprites\concatenation.png" />
+	  <EmbeddedResource Include="Sprites\congeal.png" />
 	  <EmbeddedResource Include="Sprites\connoiseur.png" />
 	  <EmbeddedResource Include="Sprites\conviction.png" />
 	  <EmbeddedResource Include="Sprites\CopperAndRhodium.png" />
@@ -596,6 +613,10 @@
 	  <EmbeddedResource Include="Sprites\film.png" />
 	  <EmbeddedResource Include="Sprites\FireDamageIntent.png" />
 	  <EmbeddedResource Include="Sprites\forest.png" />
+	  <EmbeddedResource Include="Sprites\FormidoBack.png" />
+	  <EmbeddedResource Include="Sprites\FormidoFront.png" />
+	  <EmbeddedResource Include="Sprites\FormidoMenu.png" />
+	  <EmbeddedResource Include="Sprites\FormidoOverworld.png" />
 	  <EmbeddedResource Include="Sprites\ForWhomItTolls.png" />
 	  <EmbeddedResource Include="Sprites\FrenchKiss.png" />
 	  <EmbeddedResource Include="Sprites\frenzy.png" />
@@ -610,6 +631,10 @@
 	  <EmbeddedResource Include="Sprites\GommaOverworld.png" />
 	  <EmbeddedResource Include="Sprites\GrayEssence.png" />
 	  <EmbeddedResource Include="Sprites\GrayOil.png" />
+	  <EmbeddedResource Include="Sprites\GumBack.png" />
+	  <EmbeddedResource Include="Sprites\GumFront.png" />
+	  <EmbeddedResource Include="Sprites\GumMenu.png" />
+	  <EmbeddedResource Include="Sprites\GumOverworld.png" />
 	  <EmbeddedResource Include="Sprites\GunkMingGoa.png" />
 	  <EmbeddedResource Include="Sprites\HillsBack.png" />
 	  <EmbeddedResource Include="Sprites\HillsFront.png" />
@@ -653,7 +678,6 @@
 	  <EmbeddedResource Include="Sprites\Penalty.png" />
 	  <EmbeddedResource Include="Sprites\pendulum.png" />
 	  <EmbeddedResource Include="Sprites\PickledBeets.png" />
-	  <EmbeddedResource Include="Sprites\pigmentsReferences.mdp" />
 	  <EmbeddedResource Include="Sprites\PlaceholderBack.png" />
 	  <EmbeddedResource Include="Sprites\PlaceholderFront.png" />
 	  <EmbeddedResource Include="Sprites\PlaceholderLocked.png" />
@@ -663,6 +687,7 @@
 	  <EmbeddedResource Include="Sprites\PotOfGreed.png" />
 	  <EmbeddedResource Include="Sprites\prepare.png" />
 	  <EmbeddedResource Include="Sprites\projectObjection.png" />
+	  <EmbeddedResource Include="Sprites\reconfiguration.png" />
 	  <EmbeddedResource Include="Sprites\revelation.png" />
 	  <EmbeddedResource Include="Sprites\reward.png" />
 	  <EmbeddedResource Include="Sprites\RodneyBack.png" />
@@ -681,7 +706,9 @@
 	  <EmbeddedResource Include="Sprites\sands.png" />
 	  <EmbeddedResource Include="Sprites\Sauerkraut.png" />
 	  <EmbeddedResource Include="Sprites\scales.png" />
+	  <EmbeddedResource Include="Sprites\scum.png" />
 	  <EmbeddedResource Include="Sprites\shatter.png" />
+	  <EmbeddedResource Include="Sprites\shockTherapy.png" />
 	  <EmbeddedResource Include="Sprites\SickleCells.png" />
 	  <EmbeddedResource Include="Sprites\singing.png" />
 	  <EmbeddedResource Include="Sprites\slaph.png" />
@@ -699,6 +726,7 @@
 	  <EmbeddedResource Include="Sprites\SymbolOfPeace.png" />
 	  <EmbeddedResource Include="Sprites\SyrupOfIpecac.png" />
 	  <EmbeddedResource Include="Sprites\tango.png" />
+	  <EmbeddedResource Include="Sprites\thunderstrike.png" />
 	  <EmbeddedResource Include="Sprites\TitaniumAndIridium.png" />
 	  <EmbeddedResource Include="Sprites\TobyBack.png" />
 	  <EmbeddedResource Include="Sprites\TobyFront.png" />
@@ -706,6 +734,7 @@
 	  <EmbeddedResource Include="Sprites\TobyOverworld.png" />
 	  <EmbeddedResource Include="Sprites\tribulation.png" />
 	  <EmbeddedResource Include="Sprites\UnboundDamageIntent.png" />
+	  <EmbeddedResource Include="Sprites\undone.png" />
 	  <EmbeddedResource Include="Sprites\vandala effect.png" />
 	  <EmbeddedResource Include="Sprites\vandalize.png" />
 	  <EmbeddedResource Include="Sprites\VandanderBackBasic.png" />

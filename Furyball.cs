@@ -104,6 +104,7 @@ namespace Dui_Mauris_Furyball
             Hills.Add();
             Maecenas.Add();
             Toby.Add();
+            //Formido.Add();
 
             //add items
             SpearItem.Add();
@@ -120,7 +121,7 @@ namespace Dui_Mauris_Furyball
             DeadCream.Add();
             PaintedDie.Add();
             Beeper.Add();
-            //TestItemRealFreeDownload.Add();
+            BoiledPeanuts.Add();
         }
     }
 }

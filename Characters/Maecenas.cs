@@ -46,7 +46,7 @@
             ego0.effects = new Effect[]
             {
                 new(damageEgo0, 6, IntentType.Damage_3_6, Slots.Front),
-                new(ScriptableObject.CreateInstance<AddTurnTargetToTimelineEffect>(), 1, IntentType.Other_Refresh, Slots.Front),
+                new(ScriptableObject.CreateInstance<AddTurnTargetToTimelineWhenPossibleEffect>(), 1, IntentType.Other_Refresh, Slots.Front),
             };
             ego0.animationTarget = Slots.Self;
             ego0.visuals = LoadedAssetsHandler.GetCharacterAbility("Insult_1_A").visuals;

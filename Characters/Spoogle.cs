@@ -125,8 +125,16 @@
 
 
             //ablate
-            DamageEffect AblateDamage = ScriptableObject.CreateInstance<DamageEffect>();
-            AblateDamage._usePreviousExitValue = true;
+            var AblateDamage0 = ScriptableObject.CreateInstance<DamageBonusDamageEffect>();
+            AblateDamage0._denominator = 1;
+            AblateDamage0._numerator = 0;
+            var AblateDamage1 = ScriptableObject.CreateInstance<DamageBonusDamageEffect>();
+            AblateDamage1._denominator = 3;
+            var AblateDamage2 = ScriptableObject.CreateInstance<DamageBonusDamageEffect>();
+            AblateDamage2._denominator = 2;
+            var AblateDamage3 = ScriptableObject.CreateInstance<DamageBonusDamageEffect>();
+            AblateDamage3._denominator = 4;
+            AblateDamage3._numerator = 3;
 
             Ability ablate0 = new Ability();
             ablate0.name = "Feebly Ablate";
@@ -138,37 +146,43 @@
                     new(LeakinessUp, 3, null, Slots.Self),
                     new(ScriptableObject.CreateInstance<HealEffect>(), 1, IntentType.Heal_1_4, Slots.Self),
                     new(YummyYellow, 0, IntentType.Mana_Consume, Slots.Self),
-                    new(ScriptableObject.CreateInstance<PreviousExitPercentage>(), 100, null, Slots.Self),
-                    new(AblateDamage, 1, IntentType.Damage_7_10, Slots.Front),
+                    new(AblateDamage0, 1, IntentType.Damage_7_10, Slots.Front),
                 };
             ablate0.animationTarget = Slots.Self;
             ablate0.visuals = LoadedAssetsHandler.GetCharacterAbility("Wrath_1_A").visuals;
 
             Ability ablate1 = ablate0.Duplicate();
             ablate1.name = "Fiercely Ablate";
-            ablate1.description = "Increase Leaky by 3, then heal 1. Consume all yellow pigment. Deal 1.3 damage for each pigment consumed to the Opposing enemy.";
-            ablate1.effects[3]._entryVariable = 130;
-            ablate1.effects[4]._intent = IntentType.Damage_11_15;
+            ablate1.description = "Increase Leaky by 3, then heal 1. Consume all yellow pigment. Deal 1 damage for each pigment consumed to the Opposing enemy. An additional 1 damage is added for every 3rd pigment consumed.";
+            ablate1.effects[3]._effect = AblateDamage1;
+            ablate1.effects[3]._intent = IntentType.Damage_11_15;
 
             Ability ablate2 = ablate1.Duplicate();
             ablate2.name = "Frightfully Ablate";
-            ablate2.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal 1.6 damage for each pigment consumed to the Opposing enemy.";
-            ablate2.effects[3]._entryVariable = 160;
-            ablate2.effects[4]._intent = IntentType.Damage_16_20;
+            ablate2.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal 1 damage for each pigment consumed to the Opposing enemy. An additional 1 damage is added for every 2nd pigment consumed.";
+            ablate2.effects[1]._entryVariable = 2;
+            ablate2.effects[3]._effect = AblateDamage2;
+            ablate2.effects[3]._intent = IntentType.Damage_16_20;
 
             Ability ablate3 = ablate2.Duplicate();
             ablate3.name = "Fantasmagorically Ablate";
-            ablate3.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal 1.8 damage for each pigment consumed to the Opposing enemy.";
-            ablate3.effects[1]._entryVariable = 3;
-            ablate3.effects[3]._entryVariable = 180;
+            ablate3.description = "Increase Leaky by 3, then heal 2. Consume all yellow pigment. Deal 2 damage for each pigment consumed to the Opposing enemy. An additional 1 damage is added for every 3 out of 4 pigment consumed.";
+            ablate3.effects[3]._effect = AblateDamage3;
+            ablate3.effects[3]._intent = IntentType.Damage_21;
 
             //concatenation
-            HealEffect ConcatenationHeal = ScriptableObject.CreateInstance<HealEffect>();
-            ConcatenationHeal.usePreviousExitValue = true;
+            var ConcatenationHeal0 = ScriptableObject.CreateInstance<HealBonusHealEffect>();
+            ConcatenationHeal0._denominator = 4;
+            var ConcatenationHeal1 = ScriptableObject.CreateInstance<HealBonusHealEffect>();
+            ConcatenationHeal1._denominator = 3;
+            var ConcatenationHeal2 = ScriptableObject.CreateInstance<HealBonusHealEffect>();
+            ConcatenationHeal2._denominator = 2;
+            var ConcatenationHeal3 = ScriptableObject.CreateInstance<HealBonusHealEffect>();
+            ConcatenationHeal3._denominator = 1;
 
             Ability concatenation0 = new Ability();
             concatenation0.name = "Reduction Concatenation";
-            concatenation0.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1 for every pigment consumed.";
+            concatenation0.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1 for every pigment consumed. An additional 1 healing is added for every 4th pigment consumed.";
             concatenation0.cost = new ManaColorSO[] { Pigments.SplitPigment(Pigments.Purple, Pigments.Yellow), Pigments.SplitPigment(Pigments.Purple, Pigments.Yellow), Pigments.SplitPigment(Pigments.Purple, Pigments.Yellow) };
             concatenation0.sprite = ResourceLoader.LoadSprite("concatenation");
             concatenation0.effects = new Effect[]
@@ -176,29 +190,28 @@
                     new(LeakinessDown, 2, null, Slots.Self),
                     new(ScriptableObject.CreateInstance<DamageEffect>(), 1, IntentType.Damage_1_2, Slots.Self),
                     new(YummyYellow, 0, IntentType.Mana_Consume, Slots.Self),
-                    new(ScriptableObject.CreateInstance<PreviousExitPercentage>(), 100, null, Slots.Self),
-                    new(ConcatenationHeal, 1, IntentType.Heal_1_4, Slots.Self),
+                    new(ConcatenationHeal0, 1, IntentType.Heal_1_4, Slots.Self),
                 };
             concatenation0.animationTarget = Slots.Self;
             concatenation0.visuals = LoadedAssetsHandler.GetCharacterAbility("Huff_1_A").visuals;
 
             Ability concatenation1 = concatenation0.Duplicate();
             concatenation1.name = "Oxidation Concatenation";
-            concatenation1.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1.3 for every pigment consumed.";
-            concatenation1.effects[3]._entryVariable = 130;
-            concatenation1.effects[4]._intent = IntentType.Heal_5_10;
+            concatenation1.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1 for every pigment consumed. An additional 1 healing is added for every 3rd pigment consumed.";
+            concatenation1.effects[3]._effect = ConcatenationHeal1;
+            concatenation1.effects[3]._intent = IntentType.Heal_5_10;
 
             Ability concatenation2 = concatenation1.Duplicate();
             concatenation2.name = "Coagulation Concatenation";
-            concatenation2.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1.6 for every pigment consumed.";
-            concatenation2.effects[3]._entryVariable = 160;
-            concatenation2.effects[4]._intent = IntentType.Heal_11_20;
+            concatenation2.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 1 for every pigment consumed. An additional 1 healing is added for every 2nd pigment consumed.";
+            concatenation2.effects[3]._effect = ConcatenationHeal2;
+            concatenation2.effects[3]._intent = IntentType.Heal_11_20;
 
             Ability concatenation3 = concatenation2.Duplicate();
             concatenation3.name = "Imagination Concatentation";
             concatenation3.description = "Decrease leaky by 2. Deal 1 self damage. Consume all yellow pigment, then heal 2 for every pigment consumed.";
-            concatenation3.effects[3]._entryVariable = 200;
-            concatenation3.effects[4]._intent = IntentType.Heal_21;
+            
+            concatenation3.effects[3]._intent = IntentType.Heal_21;
 
             //
             //

@@ -192,13 +192,14 @@
 
             var frenchKiss = new Ability();
             frenchKiss.name = "French Kiss";
-            frenchKiss.description = "Deal 4 damage to the Opposing enemy. Increase this party member's max health by an equivalent amount.";
+            frenchKiss.description = "Deal 4 damage to the Opposing enemy. Increase this party member's max health by an equivalent amount. Increase this party member's health by 7 if successful.";
             frenchKiss.cost = new ManaColorSO[] { Pigments.Red };
             frenchKiss.sprite = ResourceLoader.LoadSprite("FrenchKiss");
             frenchKiss.effects = new Effect[]
             {
                 new(ScriptableObject.CreateInstance<DamageEffect>(), 4, IntentType.Damage_3_6, Slots.Front),
                 new(ScriptableObject.CreateInstance<ChangeMaxHealthByPreviousExitValueEffect>(), 1, IntentType.Other_MaxHealth, Slots.Self),
+                new(ScriptableObject.CreateInstance<HealIgnoreMaxHealthEffect>(), 7, IntentType.Heal_5_10, Slots.Self, ScriptableObject.CreateInstance<PreviousEffectCondition>()),
             };
             frenchKiss.animationTarget = Slots.Front;
             frenchKiss.visuals = LoadedAssetsHandler.GetEnemyAbility("TraumaBond_A").visuals;

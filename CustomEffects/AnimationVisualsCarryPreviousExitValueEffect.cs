@@ -9,7 +9,7 @@
         public override bool PerformEffect(CombatStats stats, IUnit caster, TargetSlotInfo[] targets, bool areTargetSlots, int entryVariable, out int exitAmount)
         {
             CombatManager.Instance.AddUIAction(new PlayAbilityAnimationAction(_visuals, _animationTarget, caster));
-            exitAmount = base.PreviousExitValue * entryVariable;
+            exitAmount = base.PreviousExitValue;
             return true;
         }
     }
